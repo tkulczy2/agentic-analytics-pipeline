@@ -1,0 +1,24 @@
+measure_id,measure_name,measure_category,numerator,denominator,exclusions,performance_rate,national_benchmark,measure_weight,performance_year,performance_month
+QM001,Diabetes HbA1c Control,chronic_disease,641,983,19,65.21,70.17,2.0,2026,1
+QM002,Hypertension Control,chronic_disease,682,865,81,78.84,93.51,2.0,2026,1
+QM003,Breast Cancer Screening,preventive_care,876,1116,73,78.49,90.61,1.0,2026,1
+QM004,Colorectal Cancer Screening,preventive_care,734,830,22,88.43,98.0,1.0,2026,1
+QM005,Depression Screening,preventive_care,695,918,72,75.71,71.9,1.0,2026,1
+QM006,Fall Risk Assessment,care_coordination,582,836,14,69.62,75.64,1.5,2026,1
+QM007,Medication Reconciliation,care_coordination,741,1105,10,67.06,62.83,1.5,2026,1
+QM008,Care Transition Record,care_coordination,896,1146,94,78.18,79.81,1.5,2026,1
+QM009,Patient Satisfaction,patient_experience,642,823,61,78.01,80.83,1.0,2026,1
+QM010,Access to Care,patient_experience,867,980,66,88.47,89.68,1.0,2026,1
+QM011,Pneumonia Vaccination,preventive_care,1104,1180,44,93.56,98.0,1.0,2026,1
+QM012,Flu Vaccination,preventive_care,633,899,24,70.41,65.35,1.0,2026,1
+QM013,COPD Management,chronic_disease,695,1119,57,62.11,52.61,2.0,2026,1
+QM014,Heart Failure Management,chronic_disease,971,1187,32,81.8,91.61,2.0,2026,1
+QM015,Tobacco Use Screening,preventive_care,1007,1175,99,85.7,89.51,1.0,2026,1
+QM016,BMI Assessment,preventive_care,808,1103,90,73.25,73.47,1.0,2026,1
+QM017,Eye Exam - Diabetic,chronic_disease,788,884,55,89.14,90.87,2.0,2026,1
+QM018,Kidney Health,chronic_disease,698,1155,33,60.43,60.07,2.0,2026,1
+QM019,Advance Care Planning,care_coordination,821,1182,47,69.46,67.32,1.5,2026,1
+QM020,Hospital Readmission,care_coordination,929,1036,52,89.67,92.94,1.5,2026,1
+QM021,Provider Communication,patient_experience,867,1092,83,79.4,76.05,1.0,2026,1
+QM022,Timely Appointments,patient_experience,723,920,91,78.59,76.52,1.0,2026,1
+QM023,Overall Rating,patient_experience,787,982,18,80.14,71.04,1.0,2026,1

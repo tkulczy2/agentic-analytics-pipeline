@@ -40,11 +40,6 @@ htmlcov/
 .tox/
 .nox/
 
-# Data and reports (generated)
-data/extracts/
-reports/*.pptx
-*.csv
-
 # Environment
 .env
 .env.local
