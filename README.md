@@ -1,5 +1,7 @@
 # Agentic Analytics Pipeline
 
+> **[View Next Steps: LLM Capabilities Expansion Plan](next_steps/README.md)** - Detailed implementation plan for 10 additional LLM-powered features
+
 A production-ready autonomous analytics pipeline for Medicare Shared Savings Program (MSSP) value-based care contracts. This system demonstrates end-to-end automation from data extraction through executive reporting using a multi-agent architecture.
 
 ## Architecture
