@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MSSP Analytics Report - VBC-MSSP-001</title>
+    <style>
+        :root {
+            --primary: #1a365d;
+            --secondary: #2c5282;
+            --accent: #3182ce;
+            --success: #38a169;
+            --warning: #d69e2e;
+            --danger: #e53e3e;
+            --light: #f7fafc;
+            --dark: #1a202c;
+            --gray: #718096;
+        }
+
+```
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: var(--dark);
+        background: var(--light);
+    }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+    header {
+        background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        color: white;
+        padding: 60px 0 40px;
+    }
+
+    .header-content { display: flex; justify-content: space-between; align-items: flex-start; }
+    .logo { font-size: 12px; text-transform: uppercase; letter-spacing: 3px; opacity: 0.8; margin-bottom: 10px; }
+    h1 { font-size: 2.5rem; font-weight: 300; margin-bottom: 10px; }
+    .subtitle { font-size: 1.1rem; opacity: 0.9; }
+    .report-meta { text-align: right; font-size: 0.9rem; opacity: 0.9; }
+    .report-meta div { margin-bottom: 5px; }
+
+    nav {
+        background: white;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+    nav ul { display: flex; list-style: none; }
+    nav a {
+        display: block;
+        padding: 15px 25px;
+        color: var(--gray);
+        text-decoration: none;
+        font-weight: 500;
+        border-bottom: 3px solid transparent;
+    }
+    nav a:hover { color: var(--primary); border-bottom-color: var(--accent); }
+
+    main { padding: 40px 0; }
+
+    section {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+        margin-bottom: 30px;
+        overflow: hidden;
+    }
+
+    .section-header {
+        background: var(--primary);
+        color: white;
+        padding: 20px 30px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+    .section-header h2 { font-size: 1.3rem; font-weight: 500; }
+    .section-number {
+        background: rgba(255,255,255,0.2);
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+    }
+
+    .section-content { padding: 30px; }
+
+    .kpi-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+
+    .kpi-card {
+        background: var(--light);
+        border-radius: 8px;
+        padding: 20px;
+        text-align: center;
+        border-left: 4px solid var(--accent);
+    }
+    .kpi-card.success { border-left-color: var(--success); }
+    .kpi-card.warning { border-left-color: var(--warning); }
+    .kpi-card.danger { border-left-color: var(--danger); }
+
+    .kpi-label {
+        font-size: 0.85rem;
+        color: var(--gray);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+    }
+    .kpi-value { font-size: 1.8rem; font-weight: 600; color: var(--primary); }
+    .kpi-card.success .kpi-value { color: var(--success); }
+    .kpi-card.danger .kpi-value { color: var(--danger); }
+    .kpi-subtext { font-size: 0.8rem; color: var(--gray); margin-top: 5px; }
+
+    .insight-content { font-size: 1rem; line-height: 1.8; }
+    .insight-content p { margin-bottom: 15px; }
+    .insight-content h3, .insight-content h4 { color: var(--primary); margin: 25px 0 15px; }
+    .insight-content ul { margin: 15px 0; padding-left: 25px; }
+    .insight-content li { margin-bottom: 8px; }
+    .insight-content strong { color: var(--secondary); }
+
+    .ai-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+
+    footer {
+        background: var(--dark);
+        color: white;
+        padding: 40px 0;
+        margin-top: 40px;
+    }
+    .footer-content { display: flex; justify-content: space-between; align-items: center; }
+    .footer-disclaimer { font-size: 0.85rem; opacity: 0.7; max-width: 600px; }
+
+    @media (max-width: 768px) {
+        .header-content { flex-direction: column; }
+        .report-meta { text-align: left; margin-top: 20px; }
+        h1 { font-size: 1.8rem; }
+        nav ul { flex-wrap: wrap; }
+    }
+
+    @media print {
+        nav { position: static; box-shadow: none; }
+        header { padding: 35px 0 25px; }
+        section { box-shadow: none; border: 1px solid #e2e8f0; }
+        .ai-badge { border: 1px solid #e2e8f0; }
+        body { background: white; }
+    }
+</style>
+```
+
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div>
+                    <div class="logo">Healthcare Analytics</div>
+                    <h1>MSSP Performance Report</h1>
+                    <div class="subtitle">Medicare Shared Savings Program Analysis</div>
+                </div>
+                <div class="report-meta">
+                    <div><strong>Contract:</strong> VBC-MSSP-001</div>
+                    <div><strong>Period:</strong> November 2025</div>
+                    <div><strong>Generated:</strong> January 16, 2026</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+```
+<nav>
+    <div class="container">
+        <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#executive-summary">Executive Summary</a></li>
+            <li><a href="#analysis">Deep Analysis</a></li>
+            <li><a href="#predictions">Predictions</a></li>
+        </ul>
+    </div>
+</nav>
+
+<main>
+    <div class="container">
+        <!-- KPI Overview -->
+        <section id="overview">
+            <div class="section-header">
+                <div class="section-number">1</div>
+                <h2>Key Performance Indicators</h2>
+            </div>
+            <div class="section-content">
+                <div class="kpi-grid">
+                    <div class="kpi-card success">
+                        <div class="kpi-label">Total Savings</div>
+                        <div class="kpi-value">$51,961,980</div>
+                        <div class="kpi-subtext">72.2% vs baseline</div>
+                    </div>
+                    <div class="kpi-card success">
+                        <div class="kpi-label">Shared Savings</div>
+                        <div class="kpi-value">$25,980,990</div>
+                        <div class="kpi-subtext">50% sharing rate</div>
+                    </div>
+                    <div class="kpi-card success">
+                        <div class="kpi-label">Actual PMPM</div>
+                        <div class="kpi-value">$234.17</div>
+                        <div class="kpi-subtext">Target: $732.74</div>
+                    </div>
+                    <div class="kpi-card danger">
+                        <div class="kpi-label">Quality Score</div>
+                        <div class="kpi-value">0.0%</div>
+                        <div class="kpi-subtext">Threshold: 80%</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Total Members</div>
+                        <div class="kpi-value">7,779</div>
+                        <div class="kpi-subtext">20.6% high risk</div>
+                    </div>
+                    <div class="kpi-card warning">
+                        <div class="kpi-label">ER Visits / 1000</div>
+                        <div class="kpi-value">318.5</div>
+                        <div class="kpi-subtext">Utilization metric</div>
+                    </div>
+                </div>
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-label">Baseline Spending</div>
+                        <div class="kpi-value">$72,000,000</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Actual Spending</div>
+                        <div class="kpi-value">$20,038,020</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Admits / 1000</div>
+                        <div class="kpi-value">119.2</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Avg Risk Score</div>
+                        <div class="kpi-value">1.12</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Executive Summary -->
+        <section id="executive-summary">
+            <div class="section-header">
+                <div class="section-number">2</div>
+                <h2>Executive Summary</h2>
+            </div>
+            <div class="section-content">
+                <div class="ai-badge">AI-Generated Analysis</div>
+                <div class="insight-content">
+                    <p>
+                        Through <strong>November 2025</strong>, this MSSP contract is showing <strong>exceptional financial performance</strong> with
+                        <strong>$51.96M</strong> in savings versus baseline (<strong>72.2%</strong> below baseline) and an implied
+                        <strong>$25.98M</strong> shared savings opportunity at a 50% sharing rate. Per-member-per-month spend is
+                        <strong>$234.17</strong>, far below both the <strong>$732.74</strong> target and <strong>$771.31</strong> baseline PMPM.
+                        If validated as complete and correctly attributed, this is an outlier-level result that materially exceeds typical MSSP variance.
+                    </p>
+                    <p>
+                        The primary concern is <strong>eligibility to receive shared savings</strong>. The reported quality composite is
+                        <strong>0.0%</strong> against an <strong>80%</strong> threshold, with the quality gate marked as <strong>pending</strong>.
+                        Operationally, this is a “stop-the-line” issue: regardless of the savings magnitude, failure to clear the quality gate can
+                        <strong>eliminate or materially reduce</strong> shared savings distribution.
+                    </p>
+                    <p>
+                        Utilization signals are directionally favorable but warrant reconciliation. Inpatient admits are reported at
+                        <strong>119.2 per 1,000</strong> and ER at <strong>318.6 per 1,000</strong>. These rates, paired with the dramatic PMPM drop,
+                        are consistent with reduced acute utilization and/or site-of-care optimization—however they can also reflect
+                        <strong>claims completeness timing</strong> (runout), <strong>attribution/eligibility mismatches</strong>, or missing claim categories.
+                    </p>
+                    <p>
+                        <strong>Immediate recommendations (next 2–4 weeks):</strong>
+                    </p>
+                    <ul>
+                        <li><strong>Quality “recovery sprint”:</strong> confirm measure inventory, reporting pathways, and submission status; prioritize measures that drive the composite and threshold attainment; remediate data feeds and gaps.</li>
+                        <li><strong>Financial validation:</strong> perform claims runout/IBNR checks, confirm inclusion of Part A/B categories, reconcile member months and attribution, and validate any payment arrangements (capitation, pass-throughs, reinsurance-like offsets) that could suppress allowed amounts.</li>
+                        <li><strong>Utilization drill-down:</strong> identify which service lines (inpatient, outpatient, professional, post-acute, ED) drive the PMPM delta; isolate “one-time” effects vs repeatable interventions; lock in the operational playbook for month 12 and early 2026.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Deep Analysis -->
+        <section id="analysis">
+            <div class="section-header">
+                <div class="section-number">3</div>
+                <h2>Deep Analysis</h2>
+            </div>
+            <div class="section-content">
+                <div class="ai-badge">AI-Generated Analysis</div>
+                <div class="insight-content">
+                    <h3>1) Financial Performance and Drivers</h3>
+                    <p>
+                        Reported baseline spending is <strong>$72.0M</strong> against actual spending of <strong>$20.04M</strong> through the performance month,
+                        producing <strong>$51.96M</strong> in savings (<strong>72.17%</strong>). On a PMPM basis, baseline is <strong>$771.31</strong>,
+                        target is <strong>$732.74</strong>, and actual is <strong>$234.17</strong>. With <strong>85,569 member months</strong> (average
+                        membership <strong>7,779</strong>), the PMPM math ties tightly to the reported actual spend, suggesting internal consistency.
+                    </p>
+                    <p>
+                        That said, the magnitude of the PMPM reduction (roughly <strong>$538</strong> below target PMPM) is extraordinary for MSSP and should trigger
+                        a structured validation sequence. In practice, results of this scale commonly have one (or more) of these contributors:
+                    </p>
+                    <ul>
+                        <li><strong>Claims runout and IBNR:</strong> incomplete paid claims for recent months (especially hospital and post-acute) can suppress actual spend.</li>
+                        <li><strong>Attribution/eligibility misalignment:</strong> member months may be correct while claims are not fully attributed, or vice-versa; reconciliation is essential before steering operations based on the PMPM signal.</li>
+                        <li><strong>Benefit/payment structure effects:</strong> arrangements that move dollars off the claims file (capitation, alternative payment channels, encounter-only feeds) can understate allowed amounts unless normalized.</li>
+                        <li><strong>Category omission:</strong> missing claim types (e.g., certain professional claims, DME, outpatient, Part B drugs) can distort total cost.</li>
+                    </ul>
+
+                    <h4>Implication</h4>
+                    <p>
+                        If the savings are confirmed as “real” (complete, attributed, and normalized), the program is performing at a level that would justify
+                        codifying current utilization-management and care coordination tactics into standard operations. If not confirmed, the risk is
+                        making tactical decisions off a financially incomplete signal while year-end reconciliation reverses a portion of the apparent gains.
+                    </p>
+
+                    <h3>2) Utilization and Operational Signals</h3>
+                    <p>
+                        Reported utilization is <strong>927 total admits</strong> and <strong>2,478 total ER visits</strong>, equating to <strong>119.17 admits per 1,000</strong>
+                        and <strong>318.55 ER visits per 1,000</strong>. These metrics suggest comparatively low inpatient use and moderate ED use.
+                        In many MSSP populations, inpatient utilization is a primary cost driver; therefore, a reduction in admissions and/or avoidable bed days
+                        can be a meaningful contributor to PMPM improvement.
+                    </p>
+                    <p>
+                        However, utilization rates should be interpreted alongside claims timing. ED claims and professional claims often mature faster than inpatient and post-acute.
+                        A pattern where ED appears “normal” while inpatient appears unusually low can indicate runout. A practical way to validate:
+                    </p>
+                    <ul>
+                        <li>Compare <strong>month-by-month paid-through</strong> completeness (e.g., % of expected allowed captured by service month).</li>
+                        <li>Check <strong>inpatient/post-acute lag</strong> vs professional/outpatient lag; ensure consistent maturity windows.</li>
+                        <li>Reconcile <strong>admission counts</strong> to hospital encounter feeds or ADT where available.</li>
+                    </ul>
+
+                    <h3>3) Risk Stratification and Population Implications</h3>
+                    <p>
+                        The population totals <strong>7,779 members</strong> with <strong>20.57%</strong> high-risk (1,600), <strong>45.76%</strong> medium-risk (3,560),
+                        and <strong>33.67%</strong> low-risk (2,619). The average risk score is <strong>1.12</strong>, indicating above-average clinical risk overall.
+                        In a risk-bearing MSSP context, a one-fifth high-risk segment typically accounts for a disproportionate share of admissions, ED use,
+                        and post-acute spending—making targeted interventions (transitions of care, CHF/COPD pathways, med reconciliation, SNF steering)
+                        the highest-leverage operational moves.
+                    </p>
+                    <p>
+                        With this risk mix, sustainable savings usually require <strong>repeatable utilization management</strong> (not just one-time deferrals).
+                        Recommended operational analysis cuts:
+                    </p>
+                    <ul>
+                        <li><strong>High-risk utilization:</strong> admits/1,000 and ER/1,000 for high-risk vs others; identify “frequent flyers” and near-term avoidable patterns.</li>
+                        <li><strong>Post-acute funnel:</strong> SNF/HH/IRF utilization per admission; LOS and readmissions; preferred network performance.</li>
+                        <li><strong>Condition cohorts:</strong> CHF, COPD, diabetes, CKD—compare admission drivers and ambulatory sensitive conditions.</li>
+                    </ul>
+
+                    <h3>4) Quality Performance and the Shared Savings Gate</h3>
+                    <p>
+                        Quality reporting is the dominant risk to monetizing the financial performance. The <strong>composite score is 0.0%</strong> with an
+                        <strong>80%</strong> threshold and the gate listed as <strong>pending</strong>. A 0.0% composite is rarely a true “performance” outcome;
+                        it more commonly indicates <strong>missing data, missing submissions, measure mapping issues, or measures not yet loaded</strong>.
+                    </p>
+                    <p>
+                        From an MSSP performance management perspective, this should be treated as a critical-path workstream:
+                    </p>
+                    <ul>
+                        <li><strong>Measure governance:</strong> confirm the measure list, specifications year, and reporting mechanism(s) used (registry/EHR, claims, CAHPS, etc.).</li>
+                        <li><strong>Data readiness:</strong> validate numerator/denominator availability, patient matching, and required encounter/diagnosis coding capture.</li>
+                        <li><strong>Submission control:</strong> confirm deadlines met, file acceptance, and any rejection/validation errors; create a remediation log with owners and due dates.</li>
+                        <li><strong>Fast wins:</strong> prioritize measures with high denominator and feasible gap closure (e.g., preventive and chronic care documentation cleanup, outreach completion, closing care gaps via standing orders).</li>
+                    </ul>
+                    <p>
+                        <strong>Implication:</strong> Until the quality gate risk is resolved, the reported shared savings amount should be treated as
+                        <strong>at-risk</strong> even if the savings itself is likely to hold.
+                    </p>
+
+                    <h3>5) What to Do Next: Decision-Ready Actions</h3>
+                    <ul>
+                        <li><strong>Lock financial credibility:</strong> complete a month-11 claims maturity assessment, identify IBNR exposure, and produce an “adjusted” PMPM range.</li>
+                        <li><strong>Publish driver decomposition:</strong> quantify savings contributions by major categories (inpatient, outpatient, professional, post-acute, DME, Part B drugs if applicable).</li>
+                        <li><strong>Quality war room:</strong> stand up weekly executive review until composite and gate status are confirmed above threshold; track measure-level progress and submission validation.</li>
+                        <li><strong>High-risk focus:</strong> deploy high-touch transitions (48-hour post-discharge calls, 7-day follow-up scheduling), ED diversion pathways, and preferred post-acute network steering.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Predictions -->
+        <section id="predictions">
+            <div class="section-header">
+                <div class="section-number">4</div>
+                <h2>Predictive Outlook</h2>
+            </div>
+            <div class="section-content">
+                <div class="ai-badge">AI-Generated Analysis</div>
+                <div class="insight-content">
+                    <p>
+                        The year-end model projects <strong>$51.79M</strong> in savings and <strong>$25.90M</strong> in shared savings, with a
+                        <strong>99.99%</strong> probability of meeting the financial target. The forecast range is wide but still favorable:
+                        <strong>$37.68M</strong> (lower bound) to <strong>$65.91M</strong> (upper bound). Based on the consistency between PMPM, member months,
+                        and total spend, confidence is <strong>high</strong> that the program remains below target through year-end, assuming no major reconciliation shocks.
+                    </p>
+                    <p>
+                        The gating issue is quality. The model assigns a <strong>0.0%</strong> probability of clearing the quality gate as currently reported,
+                        making the <strong>largest risk</strong> not “can we generate savings?” but “can we <strong>receive</strong> the shared savings distribution?”
+                        Treat the current shared savings estimate as <strong>conditional</strong> until measure capture, submission status, and CMS/contractor feedback confirm
+                        a composite above the <strong>80%</strong> threshold.
+                    </p>
+                    <p>
+                        <strong>Recommendations for the remaining period (month 12 and close-out):</strong>
+                    </p>
+                    <ul>
+                        <li><strong>Quality-first execution:</strong> resolve data ingestion/submission defects immediately; prioritize measures most influential to the composite; document remediation evidence for auditability.</li>
+                        <li><strong>Protect utilization gains:</strong> intensify transitions-of-care for the 20.6% high-risk cohort; focus on avoidable admissions/readmissions and post-acute routing.</li>
+                        <li><strong>De-risk financial close:</strong> produce an “IBNR-adjusted” year-end savings estimate and monitor late-arriving inpatient and post-acute claims weekly.</li>
+                    </ul>
+                    <p>
+                        If quality reporting is corrected and validated, the contract is positioned for a <strong>top-tier</strong> year-end financial outcome.
+                        If quality remains unresolved, the organization should still preserve the operational playbook driving lower utilization, but set expectations
+                        that shared savings distribution may be <strong>delayed, reduced, or forfeited</strong> depending on final gate determination.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-disclaimer">
+                <strong>Disclaimer:</strong> This report was generated using AI-powered analytics.
+                All insights should be reviewed by qualified healthcare professionals before
+                making operational decisions.
+            </div>
+        </div>
+    </div>
+</footer>
+```
+
+</body>
+</html>
+

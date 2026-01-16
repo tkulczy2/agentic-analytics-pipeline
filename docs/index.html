@@ -3,831 +3,280 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MSSP Analytics Report - VBC-MSSP-001</title>
+    <title>LLM Insights Reports - MSSP Analytics</title>
     <style>
         :root {
-            --primary: #1e3a5f;
-            --secondary: #3498db;
-            --success: #27ae60;
-            --warning: #f39c12;
-            --danger: #e74c3c;
-            --light: #f8f9fa;
-            --dark: #2c3e50;
-            --border: #e0e0e0;
+            --primary: #1a365d;
+            --secondary: #2c5282;
+            --light: #f7fafc;
+            --dark: #1a202c;
+            --gray: #718096;
+            --claude-color: #d97706;
+            --gemini-color: #4285f4;
+            --chatgpt-color: #10a37f;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: #f5f7fa;
-            color: var(--dark);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
+            min-height: 100vh;
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1000px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 20px;
         }
 
-        /* Header */
-        .header {
-            background: linear-gradient(135deg, var(--primary) 0%, #2c5282 100%);
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
-            padding: 40px;
-            margin-bottom: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            padding: 60px 0;
+            text-align: center;
         }
 
-        .header h1 {
+        .logo {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.8;
+            margin-bottom: 15px;
+        }
+
+        h1 {
             font-size: 2.5rem;
-            font-weight: 700;
+            font-weight: 300;
             margin-bottom: 10px;
         }
 
-        .header-meta {
-            display: flex;
-            gap: 30px;
-            flex-wrap: wrap;
-            margin-top: 20px;
-            font-size: 0.95rem;
+        .subtitle {
+            font-size: 1.1rem;
             opacity: 0.9;
         }
 
-        .header-meta span {
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        main {
+            padding: 50px 0;
         }
 
-        .status-badge {
-            display: inline-block;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            text-transform: uppercase;
+        .intro {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--gray);
         }
 
-        .status-completed { background: var(--success); }
-        .status-failed { background: var(--danger); }
-        .status-running { background: var(--warning); }
-
-        /* Cards Grid */
-        .cards-grid {
+        .reports-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
+            gap: 30px;
+            margin-bottom: 50px;
         }
 
-        .card {
+        .report-card {
             background: white;
             border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-            border: 1px solid var(--border);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .report-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
         }
 
         .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid var(--light);
+            padding: 25px;
+            color: white;
+            text-align: center;
         }
 
-        .card-title {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #666;
+        .card-header.claude { background: linear-gradient(135deg, #d97706 0%, #b45309 100%); }
+        .card-header.gemini { background: linear-gradient(135deg, #4285f4 0%, #1a73e8 100%); }
+        .card-header.chatgpt { background: linear-gradient(135deg, #10a37f 0%, #0d8a6a 100%); }
+
+        .provider-name {
+            font-size: 1.4rem;
             font-weight: 600;
+            margin-bottom: 5px;
         }
 
-        .card-value {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .card-value.success { color: var(--success); }
-        .card-value.warning { color: var(--warning); }
-        .card-value.danger { color: var(--danger); }
-
-        .card-subtitle {
+        .model-name {
             font-size: 0.9rem;
-            color: #666;
-            margin-top: 8px;
+            opacity: 0.9;
         }
 
-        /* Sections */
-        .section {
+        .card-body {
+            padding: 25px;
+        }
+
+        .card-description {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        .view-report {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--secondary);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .view-report svg {
+            transition: transform 0.2s;
+        }
+
+        .report-card:hover .view-report svg {
+            transform: translateX(4px);
+        }
+
+        .info-section {
             background: white;
             border-radius: 12px;
             padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-            border: 1px solid var(--border);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
 
-        .section-title {
-            font-size: 1.4rem;
-            font-weight: 700;
+        .info-section h2 {
             color: var(--primary);
-            margin-bottom: 24px;
-            padding-bottom: 12px;
-            border-bottom: 3px solid var(--secondary);
-            display: inline-block;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
         }
 
-        /* Tables */
-        .table-wrapper {
-            overflow-x: auto;
+        .info-section p {
+            color: var(--gray);
+            font-size: 0.95rem;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.9rem;
+        .info-section ul {
+            margin-top: 15px;
+            padding-left: 20px;
+            color: var(--gray);
         }
 
-        th, td {
-            padding: 14px 16px;
-            text-align: left;
-            border-bottom: 1px solid var(--border);
-        }
-
-        th {
-            background: var(--light);
-            font-weight: 600;
-            color: var(--dark);
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 0.5px;
-        }
-
-        tr:hover {
-            background: #fafbfc;
-        }
-
-        /* Progress Bars */
-        .progress-bar {
-            height: 10px;
-            background: var(--light);
-            border-radius: 5px;
-            overflow: hidden;
-            margin-top: 8px;
-        }
-
-        .progress-fill {
-            height: 100%;
-            border-radius: 5px;
-            transition: width 0.5s ease;
-        }
-
-        .progress-fill.success { background: var(--success); }
-        .progress-fill.warning { background: var(--warning); }
-        .progress-fill.danger { background: var(--danger); }
-
-        /* Risk Distribution */
-        .risk-bars {
-            display: flex;
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .risk-bar {
-            flex: 1;
-            text-align: center;
-        }
-
-        .risk-bar-label {
-            font-weight: 600;
+        .info-section li {
             margin-bottom: 8px;
         }
 
-        .risk-bar-value {
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .risk-bar-pct {
-            font-size: 0.9rem;
-            color: #666;
-        }
-
-        /* Insights */
-        .insights-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .insight-card {
-            padding: 20px;
-            border-radius: 8px;
-            border-left: 4px solid;
-        }
-
-        .insight-card.opportunity {
-            background: #e8f5e9;
-            border-color: var(--success);
-        }
-
-        .insight-card.risk {
-            background: #ffebee;
-            border-color: var(--danger);
-        }
-
-        .insight-title {
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .insight-description {
-            font-size: 0.9rem;
-            color: #555;
-        }
-
-        /* Pipeline Status */
-        .pipeline {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-            position: relative;
-        }
-
-        .pipeline::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--border);
-            z-index: 1;
-        }
-
-        .pipeline-stage {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            z-index: 2;
-            background: white;
-            padding: 0 15px;
-        }
-
-        .pipeline-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
+        footer {
+            background: var(--dark);
             color: white;
-            margin-bottom: 10px;
-        }
-
-        .pipeline-icon.completed { background: var(--success); }
-        .pipeline-icon.pending { background: var(--border); }
-        .pipeline-icon.failed { background: var(--danger); }
-
-        .pipeline-label {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #555;
-        }
-
-        /* Footer */
-        .footer {
+            padding: 30px 0;
             text-align: center;
-            padding: 30px;
-            color: #666;
+            margin-top: 50px;
+        }
+
+        footer p {
             font-size: 0.85rem;
+            opacity: 0.7;
         }
-
-        /* Quality Gauge */
-        .gauge-container {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-        }
-
-        .gauge {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background: conic-gradient(
-                var(--success) 0deg calc(3.6deg * var(--score)),
-                var(--light) calc(3.6deg * var(--score)) 360deg
-            );
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .gauge::before {
-            content: '';
-            width: 110px;
-            height: 110px;
-            background: white;
-            border-radius: 50%;
-            position: absolute;
-        }
-
-        .gauge-value {
-            position: relative;
-            z-index: 1;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .gauge-info {
-            flex: 1;
-        }
-
-        .gauge-status {
-            display: inline-block;
-            padding: 6px 14px;
-            border-radius: 6px;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        .gauge-status.eligible { background: #d4edda; color: #155724; }
-        .gauge-status.at-risk { background: #fff3cd; color: #856404; }
-        .gauge-status.ineligible { background: #f8d7da; color: #721c24; }
 
         @media (max-width: 768px) {
-            .header h1 { font-size: 1.8rem; }
-            .cards-grid { grid-template-columns: 1fr; }
-            .pipeline { flex-wrap: wrap; gap: 20px; }
-            .pipeline::before { display: none; }
+            h1 { font-size: 1.8rem; }
+            header { padding: 40px 0; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 20px;">
-                <div>
-                    <h1>MSSP Analytics Report</h1>
-                    <p style="font-size: 1.1rem; opacity: 0.9;">Medicare Shared Savings Program Performance Analysis</p>
-                </div>
-                <span class="status-badge status-completed">Completed</span>
-            </div>
-            <div class="header-meta">
-                <span><strong>Contract:</strong> VBC-MSSP-001</span>
-                <span><strong>Period:</strong> January 2026</span>
-                <span><strong>Workflow ID:</strong> wf-2ec0b43aaf22</span>
-                <span><strong>Generated:</strong> January 15, 2026</span>
-            </div>
+    <header>
+        <div class="container">
+            <div class="logo">Healthcare Analytics</div>
+            <h1>LLM Insights Reports</h1>
+            <div class="subtitle">MSSP Performance Analysis - November 2025</div>
         </div>
+    </header>
 
-        <!-- Pipeline Status -->
-        <div class="section">
-            <h2 class="section-title">Pipeline Execution</h2>
-            <div class="pipeline">
-                <div class="pipeline-stage">
-                    <div class="pipeline-icon completed">1</div>
-                    <span class="pipeline-label">Data Extraction</span>
-                </div>
-                <div class="pipeline-stage">
-                    <div class="pipeline-icon completed">2</div>
-                    <span class="pipeline-label">Validation</span>
-                </div>
-                <div class="pipeline-stage">
-                    <div class="pipeline-icon completed">3</div>
-                    <span class="pipeline-label">Analysis</span>
-                </div>
-                <div class="pipeline-stage">
-                    <div class="pipeline-icon completed">4</div>
-                    <span class="pipeline-label">Reporting</span>
-                </div>
-            </div>
-        </div>
+    <main>
+        <div class="container">
+            <p class="intro">
+                Select a report below to view AI-generated insights for contract VBC-MSSP-001.
+                Each report was generated by a different large language model.
+            </p>
 
-        <!-- Executive Summary Cards -->
-        <div class="cards-grid">
-            <div class="card">
-                <div class="card-header">
-                    <span class="card-title">Total Savings</span>
-                </div>
-                <div class="card-value success">$67.8M</div>
-                <div class="card-subtitle">94.2% below baseline spending</div>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    <span class="card-title">Shared Savings</span>
-                </div>
-                <div class="card-value">$33.9M</div>
-                <div class="card-subtitle">Projected payment at 50% share rate</div>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    <span class="card-title">Quality Score</span>
-                </div>
-                <div class="card-value success">81.0%</div>
-                <div class="card-subtitle">Above 80% threshold - Eligible</div>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    <span class="card-title">Members</span>
-                </div>
-                <div class="card-value">4,774</div>
-                <div class="card-subtitle">4,774 member-months analyzed</div>
-            </div>
-        </div>
-
-        <!-- Financial Performance -->
-        <div class="section">
-            <h2 class="section-title">Financial Performance</h2>
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Metric</th>
-                            <th style="text-align: right;">Value</th>
-                            <th>Notes</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Baseline Spending</strong></td>
-                            <td style="text-align: right;">$72,000,000</td>
-                            <td>Annual benchmark</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Actual Spending</strong></td>
-                            <td style="text-align: right;">$4,183,865</td>
-                            <td>Year-to-date</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Medical Spending</strong></td>
-                            <td style="text-align: right;">$338,594</td>
-                            <td>Medical claims only</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Pharmacy Spending</strong></td>
-                            <td style="text-align: right;">$10,061</td>
-                            <td>Prescription drugs</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Total Savings</strong></td>
-                            <td style="text-align: right; color: var(--success); font-weight: 700;">$67,816,135</td>
-                            <td>94.2% savings rate</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Shared Savings Amount</strong></td>
-                            <td style="text-align: right; color: var(--primary); font-weight: 700;">$33,908,068</td>
-                            <td>At 50% share rate</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <h3 style="margin-top: 30px; margin-bottom: 15px; font-size: 1.1rem;">Per Member Per Month (PMPM) Metrics</h3>
-            <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
-                <div class="card" style="padding: 16px;">
-                    <div class="card-title" style="font-size: 0.75rem;">Baseline PMPM</div>
-                    <div style="font-size: 1.5rem; font-weight: 700; margin-top: 8px;">$1,257</div>
-                </div>
-                <div class="card" style="padding: 16px;">
-                    <div class="card-title" style="font-size: 0.75rem;">Target PMPM</div>
-                    <div style="font-size: 1.5rem; font-weight: 700; margin-top: 8px;">$1,194</div>
-                </div>
-                <div class="card" style="padding: 16px;">
-                    <div class="card-title" style="font-size: 0.75rem;">Actual PMPM</div>
-                    <div style="font-size: 1.5rem; font-weight: 700; margin-top: 8px; color: var(--success);">$876</div>
-                </div>
-                <div class="card" style="padding: 16px;">
-                    <div class="card-title" style="font-size: 0.75rem;">ER Visits/1000</div>
-                    <div style="font-size: 1.5rem; font-weight: 700; margin-top: 8px;">9.4</div>
-                </div>
-                <div class="card" style="padding: 16px;">
-                    <div class="card-title" style="font-size: 0.75rem;">Admits/1000</div>
-                    <div style="font-size: 1.5rem; font-weight: 700; margin-top: 8px;">4.8</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Quality Performance -->
-        <div class="section">
-            <h2 class="section-title">Quality Performance</h2>
-            <div class="gauge-container">
-                <div class="gauge" style="--score: 81;">
-                    <span class="gauge-value">81.0%</span>
-                </div>
-                <div class="gauge-info">
-                    <h3 style="margin-bottom: 10px;">Composite Quality Score</h3>
-                    <span class="gauge-status eligible">ELIGIBLE</span>
-                    <p style="margin-top: 15px; color: #666;">Score exceeds the 80% quality threshold required for shared savings eligibility.</p>
-                </div>
-            </div>
-
-            <h3 style="margin-top: 30px; margin-bottom: 15px; font-size: 1.1rem;">Category Scores</h3>
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Category</th>
-                            <th>Weight</th>
-                            <th style="width: 40%;">Performance</th>
-                            <th style="text-align: right;">Score</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Preventive Care</strong></td>
-                            <td>1.0x</td>
-                            <td>
-                                <div class="progress-bar">
-                                    <div class="progress-fill success" style="width: 83.6%;"></div>
-                                </div>
-                            </td>
-                            <td style="text-align: right; font-weight: 600;">83.6%</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Chronic Disease Management</strong></td>
-                            <td>2.0x</td>
-                            <td>
-                                <div class="progress-bar">
-                                    <div class="progress-fill warning" style="width: 76.1%;"></div>
-                                </div>
-                            </td>
-                            <td style="text-align: right; font-weight: 600;">76.1%</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Care Coordination</strong></td>
-                            <td>1.5x</td>
-                            <td>
-                                <div class="progress-bar">
-                                    <div class="progress-fill success" style="width: 82.6%;"></div>
-                                </div>
-                            </td>
-                            <td style="text-align: right; font-weight: 600;">82.6%</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Patient Experience</strong></td>
-                            <td>1.0x</td>
-                            <td>
-                                <div class="progress-bar">
-                                    <div class="progress-fill success" style="width: 86.1%;"></div>
-                                </div>
-                            </td>
-                            <td style="text-align: right; font-weight: 600;">86.1%</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <h3 style="margin-top: 30px; margin-bottom: 15px; font-size: 1.1rem;">Individual Quality Measures</h3>
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Measure</th>
-                            <th>Category</th>
-                            <th style="text-align: right;">Numerator</th>
-                            <th style="text-align: right;">Denominator</th>
-                            <th style="text-align: right;">Rate</th>
-                            <th style="text-align: right;">Benchmark</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Diabetes HbA1c Control</td>
-                            <td>Chronic Disease</td>
-                            <td style="text-align: right;">867</td>
-                            <td style="text-align: right;">995</td>
-                            <td style="text-align: right; font-weight: 600;">87.1%</td>
-                            <td style="text-align: right;">86.5%</td>
-                            <td><span style="color: var(--success);">Above</span></td>
-                        </tr>
-                        <tr>
-                            <td>Hypertension Control</td>
-                            <td>Chronic Disease</td>
-                            <td style="text-align: right;">751</td>
-                            <td style="text-align: right;">1,106</td>
-                            <td style="text-align: right; font-weight: 600;">67.9%</td>
-                            <td style="text-align: right;">64.6%</td>
-                            <td><span style="color: var(--success);">Above</span></td>
-                        </tr>
-                        <tr>
-                            <td>Breast Cancer Screening</td>
-                            <td>Preventive Care</td>
-                            <td style="text-align: right;">772</td>
-                            <td style="text-align: right;">982</td>
-                            <td style="text-align: right; font-weight: 600;">78.6%</td>
-                            <td style="text-align: right;">79.2%</td>
-                            <td><span style="color: var(--warning);">Below</span></td>
-                        </tr>
-                        <tr>
-                            <td>Colorectal Cancer Screening</td>
-                            <td>Preventive Care</td>
-                            <td style="text-align: right;">770</td>
-                            <td style="text-align: right;">880</td>
-                            <td style="text-align: right; font-weight: 600;">87.5%</td>
-                            <td style="text-align: right;">81.0%</td>
-                            <td><span style="color: var(--success);">Above</span></td>
-                        </tr>
-                        <tr>
-                            <td>Depression Screening</td>
-                            <td>Preventive Care</td>
-                            <td style="text-align: right;">710</td>
-                            <td style="text-align: right;">874</td>
-                            <td style="text-align: right; font-weight: 600;">81.2%</td>
-                            <td style="text-align: right;">73.8%</td>
-                            <td><span style="color: var(--success);">Above</span></td>
-                        </tr>
-                        <tr>
-                            <td>Medication Reconciliation</td>
-                            <td>Care Coordination</td>
-                            <td style="text-align: right;">885</td>
-                            <td style="text-align: right;">988</td>
-                            <td style="text-align: right; font-weight: 600;">89.6%</td>
-                            <td style="text-align: right;">90.3%</td>
-                            <td><span style="color: var(--warning);">Below</span></td>
-                        </tr>
-                        <tr>
-                            <td>Patient Satisfaction</td>
-                            <td>Patient Experience</td>
-                            <td style="text-align: right;">947</td>
-                            <td style="text-align: right;">1,006</td>
-                            <td style="text-align: right; font-weight: 600;">94.1%</td>
-                            <td style="text-align: right;">98.0%</td>
-                            <td><span style="color: var(--warning);">Below</span></td>
-                        </tr>
-                        <tr>
-                            <td>COPD Management</td>
-                            <td>Chronic Disease</td>
-                            <td style="text-align: right;">927</td>
-                            <td style="text-align: right;">1,157</td>
-                            <td style="text-align: right; font-weight: 600;">80.1%</td>
-                            <td style="text-align: right;">72.5%</td>
-                            <td><span style="color: var(--success);">Above</span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- Risk Stratification -->
-        <div class="section">
-            <h2 class="section-title">Risk Stratification</h2>
-            <div class="risk-bars">
-                <div class="risk-bar">
-                    <div class="risk-bar-label" style="color: var(--success);">Low Risk</div>
-                    <div class="risk-bar-value" style="color: var(--success);">1,520</div>
-                    <div class="risk-bar-pct">31.8% of members</div>
-                    <div style="margin-top: 10px; font-size: 0.9rem;">PMPM: $66</div>
-                </div>
-                <div class="risk-bar">
-                    <div class="risk-bar-label" style="color: var(--warning);">Medium Risk</div>
-                    <div class="risk-bar-value" style="color: var(--warning);">2,241</div>
-                    <div class="risk-bar-pct">46.9% of members</div>
-                    <div style="margin-top: 10px; font-size: 0.9rem;">PMPM: $74</div>
-                </div>
-                <div class="risk-bar">
-                    <div class="risk-bar-label" style="color: var(--danger);">High Risk</div>
-                    <div class="risk-bar-value" style="color: var(--danger);">1,013</div>
-                    <div class="risk-bar-pct">21.2% of members</div>
-                    <div style="margin-top: 10px; font-size: 0.9rem;">PMPM: $66</div>
-                </div>
-            </div>
-
-            <div style="margin-top: 30px; padding: 20px; background: var(--light); border-radius: 8px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
-                    <div>
-                        <div style="font-size: 0.85rem; color: #666; text-transform: uppercase; letter-spacing: 0.5px;">Average HCC Risk Score</div>
-                        <div style="font-size: 2rem; font-weight: 700; color: var(--primary);">1.14</div>
+            <div class="reports-grid">
+                <a href="../reports/llm_insights_report_claude.html" class="report-card">
+                    <div class="card-header claude">
+                        <div class="provider-name">Claude</div>
+                        <div class="model-name">Anthropic Claude Opus 4</div>
                     </div>
-                    <div style="font-size: 0.9rem; color: #666; max-width: 400px;">
-                        Medicare average = 1.0. A score above 1.0 indicates the population is sicker than average Medicare, justifying higher baseline spending.
+                    <div class="card-body">
+                        <p class="card-description">
+                            Executive summary, deep analysis, and predictive outlook generated by Anthropic's Claude Opus 4.
+                        </p>
+                        <span class="view-report">
+                            View Report
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </span>
                     </div>
-                </div>
+                </a>
+
+                <a href="../reports/llm_insights_report_gemini.html" class="report-card">
+                    <div class="card-header gemini">
+                        <div class="provider-name">Gemini</div>
+                        <div class="model-name">Google Gemini 3 Pro</div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">
+                            Executive summary, deep analysis, and predictive outlook generated by Google's Gemini 3 Pro.
+                        </p>
+                        <span class="view-report">
+                            View Report
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </span>
+                    </div>
+                </a>
+
+                <a href="../reports/llm_insights_report_chatgpt.html" class="report-card">
+                    <div class="card-header chatgpt">
+                        <div class="provider-name">ChatGPT</div>
+                        <div class="model-name">OpenAI GPT-5.2</div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">
+                            Executive summary, deep analysis, and predictive outlook generated by OpenAI's GPT-5.2.
+                        </p>
+                        <span class="view-report">
+                            View Report
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="info-section">
+                <h2>About These Reports</h2>
+                <p>
+                    Each report provides AI-generated insights for the same MSSP performance data,
+                    allowing comparison of analysis quality across different LLM providers.
+                </p>
+                <ul>
+                    <li><strong>Contract:</strong> VBC-MSSP-001</li>
+                    <li><strong>Performance Period:</strong> November 2025</li>
+                    <li><strong>Report Contents:</strong> Executive Summary, Deep Analysis, Predictive Outlook</li>
+                </ul>
             </div>
         </div>
+    </main>
 
-        <!-- Predictions & Insights -->
-        <div class="section">
-            <h2 class="section-title">Year-End Projections</h2>
-            <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
-                <div class="card" style="padding: 20px;">
-                    <div class="card-title">Projected Year-End Savings</div>
-                    <div style="font-size: 1.8rem; font-weight: 700; color: var(--success); margin-top: 10px;">$67.8M</div>
-                    <div style="font-size: 0.85rem; color: #666; margin-top: 5px;">94.1% savings rate</div>
-                </div>
-                <div class="card" style="padding: 20px;">
-                    <div class="card-title">Projected Shared Savings</div>
-                    <div style="font-size: 1.8rem; font-weight: 700; color: var(--primary); margin-top: 10px;">$33.9M</div>
-                    <div style="font-size: 0.85rem; color: #666; margin-top: 5px;">At current trajectory</div>
-                </div>
-                <div class="card" style="padding: 20px;">
-                    <div class="card-title">Probability of Savings</div>
-                    <div style="font-size: 1.8rem; font-weight: 700; color: var(--success); margin-top: 10px;">100%</div>
-                    <div style="font-size: 0.85rem; color: #666; margin-top: 5px;">Meeting target</div>
-                </div>
-                <div class="card" style="padding: 20px;">
-                    <div class="card-title">Quality Gate Probability</div>
-                    <div style="font-size: 1.8rem; font-weight: 700; color: var(--warning); margin-top: 10px;">58%</div>
-                    <div style="font-size: 0.85rem; color: #666; margin-top: 5px;">Maintaining eligibility</div>
-                </div>
-            </div>
-
-            <div style="margin-top: 20px; padding: 20px; background: var(--light); border-radius: 8px;">
-                <div style="font-weight: 600; margin-bottom: 10px;">Savings Confidence Interval (95%)</div>
-                <div style="display: flex; align-items: center; gap: 20px;">
-                    <span style="font-size: 0.9rem;">$53.7M</span>
-                    <div style="flex: 1; height: 8px; background: linear-gradient(to right, var(--warning), var(--success), var(--warning)); border-radius: 4px;"></div>
-                    <span style="font-size: 0.9rem;">$81.9M</span>
-                </div>
-            </div>
-
-            <h3 style="margin-top: 30px; margin-bottom: 15px; font-size: 1.1rem;">Key Insights</h3>
-            <div class="insights-grid">
-                <div class="insight-card opportunity">
-                    <div class="insight-title">Strong Savings Performance</div>
-                    <div class="insight-description">Tracking 94.2% below baseline. Projected shared savings of $33,908,068.</div>
-                    <div style="margin-top: 12px; font-size: 0.85rem; font-weight: 600;">Recommendation: Maintain current care management initiatives</div>
-                </div>
-            </div>
+    <footer>
+        <div class="container">
+            <p>MSSP Analytics Pipeline - AI-Generated Reports</p>
         </div>
-
-        <!-- Data Validation Summary -->
-        <div class="section">
-            <h2 class="section-title">Data Validation Summary</h2>
-            <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));">
-                <div class="card" style="padding: 16px; text-align: center;">
-                    <div style="font-size: 2rem; font-weight: 700; color: var(--success);">21</div>
-                    <div style="font-size: 0.8rem; color: #666;">Total Checks</div>
-                </div>
-                <div class="card" style="padding: 16px; text-align: center;">
-                    <div style="font-size: 2rem; font-weight: 700; color: var(--success);">18</div>
-                    <div style="font-size: 0.8rem; color: #666;">Passed</div>
-                </div>
-                <div class="card" style="padding: 16px; text-align: center;">
-                    <div style="font-size: 2rem; font-weight: 700; color: var(--warning);">3</div>
-                    <div style="font-size: 0.8rem; color: #666;">Warnings</div>
-                </div>
-                <div class="card" style="padding: 16px; text-align: center;">
-                    <div style="font-size: 2rem; font-weight: 700; color: var(--success);">0</div>
-                    <div style="font-size: 0.8rem; color: #666;">Critical Errors</div>
-                </div>
-            </div>
-
-            <h3 style="margin-top: 20px; margin-bottom: 15px; font-size: 1rem;">Records Processed</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Dataset</th>
-                        <th style="text-align: right;">Records Extracted</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Members</td>
-                        <td style="text-align: right;">4,774</td>
-                        <td><span style="color: var(--success);">Validated</span></td>
-                    </tr>
-                    <tr>
-                        <td>Medical Claims</td>
-                        <td style="text-align: right;">727</td>
-                        <td><span style="color: var(--success);">Validated</span></td>
-                    </tr>
-                    <tr>
-                        <td>Pharmacy Claims</td>
-                        <td style="text-align: right;">298</td>
-                        <td><span style="color: var(--success);">Validated</span></td>
-                    </tr>
-                    <tr>
-                        <td>Quality Measures</td>
-                        <td style="text-align: right;">23</td>
-                        <td><span style="color: var(--success);">Validated</span></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Footer -->
-        <div class="footer">
-            <p>Generated by MSSP Agentic Analytics Pipeline</p>
-            <p style="margin-top: 5px;">Workflow ID: wf-2ec0b43aaf22 | Report Generated: January 15, 2026 at 19:08 UTC</p>
-        </div>
-    </div>
+    </footer>
 </body>
 </html>

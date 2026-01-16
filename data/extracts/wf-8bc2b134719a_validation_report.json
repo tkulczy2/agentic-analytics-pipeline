@@ -1,0 +1,144 @@
+{
+  "workflow_id": "wf-8bc2b134719a",
+  "generated_at": "2026-01-16T15:12:20.180517",
+  "summary": {
+    "total_checks": 21,
+    "passed": 16,
+    "failed": 5,
+    "critical_errors": 0,
+    "warnings": 5,
+    "auto_fixes_applied": 0
+  },
+  "results": [
+    {
+      "rule_name": "required_fields",
+      "category": "completeness",
+      "severity": "critical",
+      "passed": true,
+      "message": "All required fields present",
+      "affected_records": 0,
+      "total_records": 7779,
+      "affected_percentage": 0.0,
+      "details": {},
+      "auto_fixable": false,
+      "fix_applied": false
+    },
+    {
+      "rule_name": "null_values",
+      "category": "completeness",
+      "severity": "warning",
+      "passed": true,
+      "message": "No null values in required fields",
+      "affected_records": 0,
+      "total_records": 7779,
+      "affected_percentage": 0.0,
+      "details": {},
+      "auto_fixable": false,
+      "fix_applied": false
+    },
+    {
+      "rule_name": "volume_consistency",
+      "category": "consistency",
+      "severity": "warning",
+      "passed": false,
+      "message": "Volume deviation: -35.2% from expected",
+      "affected_records": 4221,
+      "total_records": 7779,
+      "affected_percentage": 35.175,
+      "details": {
+        "expected": 12000,
+        "actual": 7779,
+        "deviation_pct": -35.175
+      },
+      "auto_fixable": false,
+      "fix_applied": false
+    },
+    {
+      "rule_name": "duplicates",
+      "category": "consistency",
+      "severity": "warning",
+      "passed": true,
+      "message": "No duplicate records found",
+      "affected_records": 0,
+      "total_records": 7779,
+      "affected_percentage": 0.0,
+      "details": {},
+      "auto_fixable": false,
+      "fix_applied": false
+    },
+    {
+      "rule_name": "age_range",
+      "category": "range",
+      "severity": "critical",
+      "passed": true,
+      "message": "All ages within valid range",
+      "affected_records": 0,
+      "total_records": 7779,
+      "affected_percentage": 0.0,
+      "details": {},
+      "auto_fixable": false,
+      "fix_applied": false
+    },
+    {
+      "rule_name": "required_fields",
+      "category": "completeness",
+      "severity": "critical",
+      "passed": true,
+      "message": "All required fields present",
+      "affected_records": 0,
+      "total_records": 30272,
+      "affected_percentage": 0.0,
+      "details": {},
+      "auto_fixable": false,
+      "fix_applied": false
+    },
+    {
+      "rule_name": "null_values",
+      "category": "completeness",
+      "severity": "warning",
+      "passed": true,
+      "message": "No null values in required fields",
+      "affected_records": 0,
+      "total_records": 30272,
+      "affected_percentage": 0.0,
+      "details": {},
+      "auto_fixable": false,
+      "fix_applied": false
+    },
+    {
+      "rule_name": "volume_consistency",
+      "category": "consistency",
+      "severity": "warning",
+      "passed": false,
+      "message": "Volume deviation: -39.5% from expected",
+      "affected_records": 19728,
+      "total_records": 30272,
+      "affected_percentage": 39.456,
+      "details": {
+        "expected": 50000,
+        "actual": 30272,
+        "deviation_pct": -39.456
+      },
+      "auto_fixable": false,
+      "fix_applied": false
+    },
+    {
+      "rule_name": "duplicates",
+      "category": "consistency",
+      "severity": "warning",
+      "passed": true,
+      "message": "No duplicate records found",
+      "affected_records": 0,
+      "total_records": 30272,
+      "affected_percentage": 0.0,
+      "details": {},
+      "auto_fixable": false,
+      "fix_applied": false
+    },
+    {
+      "rule_name": "cost_amounts",
+      "category": "range",
+      "severity": "warning",
+      "passed": false,
+      "message": "Found 2 cost amount issues",
+      "affected_records": 

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MSSP Analytics Report - VBC-MSSP-001</title>
+<style>
+:root {
+--primary: #1a365d;
+--secondary: #2c5282;
+--accent: #3182ce;
+--success: #38a169;
+--warning: #d69e2e;
+--danger: #e53e3e;
+--light: #f7fafc;
+--dark: #1a202c;
+--gray: #718096;
+}
+
+```
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: var(--dark);
+        background: var(--light);
+    }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+    header {
+        background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        color: white;
+        padding: 60px 0 40px;
+    }
+
+    .header-content { display: flex; justify-content: space-between; align-items: flex-start; }
+    .logo { font-size: 12px; text-transform: uppercase; letter-spacing: 3px; opacity: 0.8; margin-bottom: 10px; }
+    h1 { font-size: 2.5rem; font-weight: 300; margin-bottom: 10px; }
+    .subtitle { font-size: 1.1rem; opacity: 0.9; }
+    .report-meta { text-align: right; font-size: 0.9rem; opacity: 0.9; }
+    .report-meta div { margin-bottom: 5px; }
+
+    nav {
+        background: white;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+    nav ul { display: flex; list-style: none; }
+    nav a {
+        display: block;
+        padding: 15px 25px;
+        color: var(--gray);
+        text-decoration: none;
+        font-weight: 500;
+        border-bottom: 3px solid transparent;
+    }
+    nav a:hover { color: var(--primary); border-bottom-color: var(--accent); }
+
+    main { padding: 40px 0; }
+
+    section {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+        margin-bottom: 30px;
+        overflow: hidden;
+    }
+
+    .section-header {
+        background: var(--primary);
+        color: white;
+        padding: 20px 30px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+    .section-header h2 { font-size: 1.3rem; font-weight: 500; }
+    .section-number {
+        background: rgba(255,255,255,0.2);
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+    }
+
+    .section-content { padding: 30px; }
+
+    .kpi-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+
+    .kpi-card {
+        background: var(--light);
+        border-radius: 8px;
+        padding: 20px;
+        text-align: center;
+        border-left: 4px solid var(--accent);
+    }
+    .kpi-card.success { border-left-color: var(--success); }
+    .kpi-card.warning { border-left-color: var(--warning); }
+    .kpi-card.danger { border-left-color: var(--danger); }
+
+    .kpi-label {
+        font-size: 0.85rem;
+        color: var(--gray);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+    }
+    .kpi-value { font-size: 1.8rem; font-weight: 600; color: var(--primary); }
+    .kpi-card.success .kpi-value { color: var(--success); }
+    .kpi-card.danger .kpi-value { color: var(--danger); }
+    .kpi-subtext { font-size: 0.8rem; color: var(--gray); margin-top: 5px; }
+
+    .insight-content { font-size: 1rem; line-height: 1.8; }
+    .insight-content p { margin-bottom: 15px; }
+    .insight-content h3, .insight-content h4 { color: var(--primary); margin: 25px 0 15px; }
+    .insight-content ul { margin: 15px 0; padding-left: 25px; }
+    .insight-content li { margin-bottom: 8px; }
+    .insight-content strong { color: var(--secondary); }
+    
+    /* Analysis Specific Styles */
+    .metric-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.95rem; }
+    .metric-table th { text-align: left; background: var(--light); padding: 12px; border-bottom: 2px solid var(--secondary); color: var(--secondary); }
+    .metric-table td { padding: 12px; border-bottom: 1px solid #e2e8f0; }
+    .status-badge { padding: 4px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; }
+    .bg-red { background: #fed7d7; color: #c53030; }
+    .bg-green { background: #c6f6d5; color: #2f855a; }
+
+    .ai-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+
+    footer {
+        background: var(--dark);
+        color: white;
+        padding: 40px 0;
+        margin-top: 40px;
+    }
+    .footer-content { display: flex; justify-content: space-between; align-items: center; }
+    .footer-disclaimer { font-size: 0.85rem; opacity: 0.7; max-width: 600px; }
+
+    @media (max-width: 768px) {
+        .header-content { flex-direction: column; }
+        .report-meta { text-align: left; margin-top: 20px; }
+        h1 { font-size: 1.8rem; }
+        nav ul { flex-wrap: wrap; }
+    }
+</style>
+
+```
+
+</head>
+<body>
+<header>
+<div class="container">
+<div class="header-content">
+<div>
+<div class="logo">Healthcare Analytics</div>
+<h1>MSSP Performance Report</h1>
+<div class="subtitle">Medicare Shared Savings Program Analysis</div>
+</div>
+<div class="report-meta">
+<div><strong>Contract:</strong> VBC-MSSP-001</div>
+<div><strong>Period:</strong> November 2025</div>
+<div><strong>Generated:</strong> January 16, 2026</div>
+</div>
+</div>
+</div>
+</header>
+
+```
+<nav>
+    <div class="container">
+        <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#executive-summary">Executive Summary</a></li>
+            <li><a href="#analysis">Deep Analysis</a></li>
+            <li><a href="#predictions">Predictions</a></li>
+        </ul>
+    </div>
+</nav>
+
+<main>
+    <div class="container">
+        <section id="overview">
+            <div class="section-header">
+                <div class="section-number">1</div>
+                <h2>Key Performance Indicators</h2>
+            </div>
+            <div class="section-content">
+                <div class="kpi-grid">
+                    <div class="kpi-card success">
+                        <div class="kpi-label">Total Savings</div>
+                        <div class="kpi-value">$51,961,980</div>
+                        <div class="kpi-subtext">72.2% vs baseline</div>
+                    </div>
+                    <div class="kpi-card success">
+                        <div class="kpi-label">Shared Savings</div>
+                        <div class="kpi-value">$25,980,990</div>
+                        <div class="kpi-subtext">50% sharing rate</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Actual PMPM</div>
+                        <div class="kpi-value">$234.17</div>
+                        <div class="kpi-subtext">Target: $732.74</div>
+                    </div>
+                    <div class="kpi-card danger">
+                        <div class="kpi-label">Quality Score</div>
+                        <div class="kpi-value">0.0%</div>
+                        <div class="kpi-subtext">Threshold: 80%</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Total Members</div>
+                        <div class="kpi-value">7,779</div>
+                        <div class="kpi-subtext">20.6% high risk</div>
+                    </div>
+                    <div class="kpi-card warning">
+                        <div class="kpi-label">ER Visits / 1000</div>
+                        <div class="kpi-value">318.5</div>
+                        <div class="kpi-subtext">Utilization metric</div>
+                    </div>
+                </div>
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-label">Baseline Spending</div>
+                        <div class="kpi-value">$72,000,000</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Actual Spending</div>
+                        <div class="kpi-value">$20,038,020</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Admits / 1000</div>
+                        <div class="kpi-value">119.2</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Avg Risk Score</div>
+                        <div class="kpi-value">1.12</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="executive-summary">
+            <div class="section-header">
+                <div class="section-number">2</div>
+                <h2>Executive Summary</h2>
+            </div>
+            <div class="section-content">
+                <div class="ai-badge">AI-Generated Analysis</div>
+                <div class="insight-content">
+                    <p><strong>Financial Excellence Overshadowed by Compliance Risk:</strong> Through November 2025, Contract VBC-MSSP-001 has achieved exceptional financial results. The population is tracking <strong>72.17% below baseline spending expectations</strong>, resulting in total gross savings of nearly $52 million. This variance is driven by an Actual PMPM of $234.17 against a Target PMPM of $732.74. Based purely on cost metrics, the contract is positioned to earn a substantial shared savings payment of approximately $25.98 million.</p>
+
+                    <p><strong>Critical Quality Reporting Failure:</strong> Despite the financial success, the contract faces a catastrophic risk regarding Shared Savings distribution. The <strong>Composite Quality Score is currently 0.0%</strong>, which is well below the mandatory 80% threshold required to qualify for shared savings. Zeros across all domains (Preventive Care, Chronic Disease, Care Coordination, and Patient Experience) strongly suggest a systemic data aggregation or submission failure rather than a lack of clinical care. Without immediate remediation, the probability of receiving the $25.9M payout is effectively zero.</p>
+
+                    <p><strong>Operational Efficiency:</strong> Operational metrics indicate a tightly managed population despite a moderately high Average Risk Score (1.12). Utilization rates are favorable, with Admits per 1000 at 119.17 and ER Visits per 1000 at 318.55. These figures suggest that the 20.57% of the population identified as "High Risk" are being managed effectively in outpatient settings, avoiding costly inpatient admissions.</p>
+
+                    <p><strong>Immediate Recommendation:</strong> The primary focus for the remainder of the year must shift from cost control to <strong>Quality Data Governance</strong>. An emergency audit of the quality reporting data feed is required immediately to identify why clinical data is not populating the composite score. We recommend establishing a "War Room" task force to resolve the quality data gaps before the final submission deadline, as this is the single point of failure for the entire contract's revenue.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="analysis">
+            <div class="section-header">
+                <div class="section-number">3</div>
+                <h2>Deep Analysis</h2>
+            </div>
+            <div class="section-content">
+                <div class="ai-badge">AI-Generated Analysis</div>
+                <div class="insight-content">
+                    <h3>Financial Performance Drivers</h3>
+                    <p>The financial variance observed in Month 11 is statistically significant. The program is operating with a <strong>$498.57 PMPM positive variance</strong> (Savings). This degree of savings (72%) is atypical for MSSP contracts and warrants a validity check on claims data completeness, though current reporting indicates "completed" status.</p>
+                    
+                    <table class="metric-table">
+                        <thead>
+                            <tr>
+                                <th>Metric</th>
+                                <th>Target / Baseline</th>
+                                <th>Actual Performance</th>
+                                <th>Variance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>PMPM Spend</strong></td>
+                                <td>$732.74</td>
+                                <td>$234.17</td>
+                                <td><span class="status-badge bg-green">-68.0%</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Total Spend</strong></td>
+                                <td>$72,000,000</td>
+                                <td>$20,038,020</td>
+                                <td><span class="status-badge bg-green">-72.2%</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Est. Shared Savings</strong></td>
+                                <td>N/A</td>
+                                <td>$25,980,989</td>
+                                <td><span class="status-badge bg-green">POSITIVE</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Utilization & Risk Stratification</h3>
+                    <p>The population carries an Average Risk Score of <strong>1.12</strong>, indicating a member mix that is 12% more complex than the average Medicare beneficiary. With <strong>1,600 members (20.57%)</strong> categorized as High Risk, the low utilization metrics are impressive:</p>
+                    <ul>
+                        <li><strong>Inpatient Admits:</strong> 119.17/1000 (Indicating strong ambulatory care sensitive condition management).</li>
+                        <li><strong>ER Utilization:</strong> 318.55/1000 (Suggests effective urgent care alternatives and access to primary care).</li>
+                    </ul>
+                    <p>The correlation between high risk scores and low spending suggests that the "High Risk" cohort is stable, or there is potential under-coding of recent diagnoses which might affect future benchmarks.</p>
+
+                    <h3>Quality Gate Analysis: <span style="color: var(--danger);">CRITICAL FAILURE</span></h3>
+                    <p>The MSSP contract structure functions on a "gate" system. Regardless of the $51.9M in savings, the Quality Gate Status is <strong>PENDING</strong> with a score of 0.0%. The breakdown below highlights a total data void:</p>
+                    <ul>
+                        <li><strong>Preventive Care:</strong> 0.0 (Data Missing)</li>
+                        <li><strong>Chronic Disease Mgmt:</strong> 0.0 (Data Missing)</li>
+                        <li><strong>Care Coordination:</strong> 0.0 (Data Missing)</li>
+                        <li><strong>Patient Experience:</strong> 0.0 (Data Missing)</li>
+                    </ul>
+                    <p><strong>Implication:</strong> If the Composite Score remains below the 80.0 threshold at year-end reporting, the Shared Savings Amount ($25,980,989) will be forfeited. This is a binary risk: 100% of the revenue is at risk based on this single metric.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="predictions">
+            <div class="section-header">
+                <div class="section-number">4</div>
+                <h2>Predictive Outlook</h2>
+            </div>
+            <div class="section-content">
+                <div class="ai-badge">AI-Generated Analysis</div>
+                <div class="insight-content">
+                    <h3>Year-End Projections</h3>
+                    <p>With 99.99% statistical confidence, the contract will meet the financial requirements for shared savings. We project <strong>Year-End Total Savings of $51,794,996</strong>. The slight regression from current savings ($51.9M) to projected year-end savings ($51.7M) accounts for the typical end-of-year uptick in utilization and claims lag.</p>
+                    
+                    <div style="background: var(--light); padding: 15px; border-radius: 6px; border-left: 4px solid var(--secondary); margin: 20px 0;">
+                        <strong>Projected Payout Range:</strong><br>
+                        Lower Bound: $18,841,498<br>
+                        Upper Bound: $32,953,498<br>
+                        <strong>Most Likely: $25,897,498</strong>
+                    </div>
+
+                    <h3>Risks & Opportunities</h3>
+                    <p>The primary predictive insight is not financial, but regulatory. The model currently calculates a <strong>0.0% probability of meeting the Quality Gate</strong> based on the current trajectory of data submission. While the financial opportunity is massive, the risk of "claw-back" or non-payment due to quality reporting is the dominant factor in the Year-End outlook.</p>
+
+                    <h3>Strategic Recommendations</h3>
+                    <p>For the remaining weeks of the performance year and the subsequent reporting period (Q1 2026), all resources should be diverted to <strong>Quality Interface/Registry Submission</strong>. We recommend pausing new financial efficiency initiatives to focus exclusively on chart abstraction and data ingestion to ensure the quality score surpasses the 80% threshold, unlocking the $25.9M in accrued savings.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-disclaimer">
+                <strong>Disclaimer:</strong> This report was generated using AI-powered analytics.
+                All insights should be reviewed by qualified healthcare professionals before
+                making operational decisions.
+            </div>
+        </div>
+    </div>
+</footer>
+
+```
+
+</body>
+</html>
