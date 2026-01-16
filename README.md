@@ -38,7 +38,7 @@ A production-ready autonomous analytics pipeline for Medicare Shared Savings Pro
 
 5. **Reporting Agent**: Generates PowerPoint executive reports and distributes via email to appropriate stakeholders.
 
-6. **Insights Agent** (LLM-powered): Generates executive summaries, predictive narratives, answers natural language queries, and explains validation errors using Claude, OpenAI, or local models via Ollama.
+6. **Insights Agent** (LLM-powered): Generates executive summaries, predictive narratives, answers natural language queries, and explains validation errors using Claude, Gemini, or ChatGPT.
 
 ## Features
 
@@ -49,7 +49,7 @@ A production-ready autonomous analytics pipeline for Medicare Shared Savings Pro
 - **Email Notifications**: Automatic notifications on completion/failure
 - **REST API**: Full workflow management via FastAPI endpoints
 - **Comprehensive Testing**: Unit and integration test suites
-- **LLM-Powered Insights**: Executive summaries, natural language queries, and predictive narratives via Claude, OpenAI, or Ollama
+- **LLM-Powered Insights**: Executive summaries, natural language queries, and predictive narratives via Claude, Gemini, or ChatGPT
 
 ## Quick Start
 
@@ -157,8 +157,8 @@ REPORTS_DIR=/app/reports
 
 # LLM Providers (set in your shell environment)
 ANTHROPIC_API_KEY=sk-ant-...    # For Claude (default provider)
-OPENAI_API_KEY=sk-proj-...      # For OpenAI GPT models
-OLLAMA_BASE_URL=http://localhost:11434  # For local Ollama models
+GEMINI_API_KEY=...              # For Google Gemini models
+OPENAI_API_KEY=sk-proj-...      # For OpenAI ChatGPT models
 ```
 
 ## Project Structure
@@ -195,7 +195,7 @@ agentic-analytics-pipeline/
 │   │       ├── base.py         # Provider abstraction
 │   │       ├── service.py      # Main LLM service
 │   │       ├── prompts.py      # Prompt templates
-│   │       └── providers/      # Claude, OpenAI, Ollama
+│   │       └── providers/      # Claude, Gemini, ChatGPT
 │   ├── validation/
 │   │   ├── rules.py            # Validation rules
 │   │   └── remediation.py      # Auto-remediation
@@ -274,8 +274,8 @@ The Insights Agent uses large language models to generate human-readable analysi
 | Provider | Default Model | Configuration |
 |----------|---------------|---------------|
 | Claude (default) | claude-sonnet-4-20250514 | `ANTHROPIC_API_KEY` |
-| OpenAI | gpt-4o | `OPENAI_API_KEY` |
-| Ollama | llama3.1 | `OLLAMA_BASE_URL` |
+| Gemini | gemini-2.0-flash-exp | `GEMINI_API_KEY` |
+| ChatGPT | gpt-4o | `OPENAI_API_KEY` |
 
 ### Features
 
@@ -318,14 +318,14 @@ Get plain-language explanations of validation errors with remediation suggestion
 All insight endpoints accept `provider` and `model` parameters:
 
 ```bash
-# Use OpenAI instead of Claude
+# Use Gemini instead of Claude
+curl "http://localhost:8000/insights/summary/wf-abc123?provider=gemini"
+
+# Use ChatGPT
 curl "http://localhost:8000/insights/summary/wf-abc123?provider=openai"
 
 # Use a specific model
 curl "http://localhost:8000/insights/summary/wf-abc123?provider=openai&model=gpt-4-turbo"
-
-# Use local Ollama
-curl "http://localhost:8000/insights/summary/wf-abc123?provider=ollama&model=llama3.2"
 ```
 
 ## Validation Rules
