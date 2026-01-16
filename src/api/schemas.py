@@ -90,3 +90,63 @@ class HealthResponse(BaseModel):
     redis: bool
     smtp: bool
     timestamp: datetime
+
+
+# LLM Insights Schemas
+
+class QueryRequest(BaseModel):
+    """Request body for natural language queries."""
+    question: str = Field(..., description="Natural language question about the data")
+    workflow_id: Optional[str] = Field(None, description="Workflow ID for context")
+    provider: str = Field(default="claude", description="LLM provider (claude, openai, ollama)")
+    model: Optional[str] = Field(None, description="Specific model name (uses provider default if not specified)")
+
+
+class QueryResponse(BaseModel):
+    """Response model for natural language queries."""
+    question: str
+    answer: str
+    model: str
+    provider: str
+    tokens_used: int
+
+
+class InsightResponse(BaseModel):
+    """Response model for generated insights."""
+    workflow_id: str
+    content: str
+    insight_type: str  # "executive_summary" or "predictive_narrative"
+    model: str
+    provider: str
+
+
+class ErrorExplanationRequest(BaseModel):
+    """Request body for validation error explanations."""
+    error_type: str = Field(..., description="Type of validation error")
+    dataset: str = Field(..., description="Dataset where error occurred")
+    affected_count: int = Field(..., description="Number of affected records")
+    affected_pct: float = Field(..., description="Percentage of records affected")
+    error_details: Dict[str, Any] = Field(default={}, description="Additional error details")
+    provider: str = Field(default="claude", description="LLM provider")
+    model: Optional[str] = Field(None, description="Specific model name")
+
+
+class ErrorExplanationResponse(BaseModel):
+    """Response model for error explanations."""
+    error_type: str
+    explanation: str
+    model: str
+    provider: str
+
+
+class LLMProviderStatus(BaseModel):
+    """Status of an LLM provider."""
+    name: str
+    available: bool
+    default_model: str
+
+
+class LLMStatusResponse(BaseModel):
+    """Response model for LLM service status."""
+    providers: List[LLMProviderStatus]
+    default_provider: str

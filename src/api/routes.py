@@ -13,11 +13,21 @@ from src.api.schemas import (
     TestDataConfig,
     TestDataResponse,
     HealthResponse,
+    QueryRequest,
+    QueryResponse,
+    InsightResponse,
+    ErrorExplanationRequest,
+    ErrorExplanationResponse,
+    LLMStatusResponse,
+    LLMProviderStatus,
 )
 from src.agents.orchestrator import OrchestratorAgent
+from src.agents.insights import InsightsAgent
 from src.services.state_manager import StateManager
 from src.services.database import DatabaseService
 from src.services.email_service import EmailService
+from src.services.llm.service import LLMService
+from src.services.llm.base import LLMProvider
 from src.models.workflow import WorkflowStatus
 
 logger = logging.getLogger(__name__)
@@ -313,3 +323,234 @@ async def generate_test_data(config: TestDataConfig):
     except Exception as e:
         logger.exception(f"Failed to generate test data: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
+
+# =============================================================================
+# LLM Insights Routes
+# =============================================================================
+
+def _get_insights_agent(provider: str = "claude", model: Optional[str] = None) -> InsightsAgent:
+    """Create an InsightsAgent with specified provider."""
+    return InsightsAgent(
+        state_manager=get_state_manager(),
+        llm_provider=provider,
+        llm_model=model,
+    )
+
+
+@router.post("/insights/query", response_model=QueryResponse, tags=["insights"])
+async def query_data(request: QueryRequest):
+    """
+    Ask a natural language question about the data.
+
+    Optionally provide a workflow_id to include that workflow's metrics as context.
+    """
+    try:
+        agent = _get_insights_agent(request.provider, request.model)
+
+        workflow_state = None
+        if request.workflow_id:
+            state_manager = get_state_manager()
+            workflow_state = await state_manager.get_workflow(request.workflow_id)
+            if not workflow_state:
+                raise HTTPException(status_code=404, detail="Workflow not found")
+
+        result = await agent.answer_query(
+            question=request.question,
+            workflow_state=workflow_state,
+        )
+
+        return QueryResponse(
+            question=result["question"],
+            answer=result["answer"],
+            model=result["model"],
+            provider=result["provider"],
+            tokens_used=result["tokens_used"],
+        )
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.exception(f"Query failed: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/insights/summary/{workflow_id}", response_model=InsightResponse, tags=["insights"])
+async def get_executive_summary(
+    workflow_id: str,
+    provider: str = "claude",
+    model: Optional[str] = None,
+):
+    """
+    Generate an executive summary for a completed workflow.
+
+    Requires the workflow to have financial and quality metrics calculated.
+    """
+    state_manager = get_state_manager()
+
+    workflow_state = await state_manager.get_workflow(workflow_id)
+    if not workflow_state:
+        raise HTTPException(status_code=404, detail="Workflow not found")
+
+    if not workflow_state.financial_metrics or not workflow_state.quality_metrics:
+        raise HTTPException(
+            status_code=400,
+            detail="Workflow must have financial and quality metrics to generate summary"
+        )
+
+    try:
+        agent = _get_insights_agent(provider, model)
+        summary = await agent.generate_executive_summary(workflow_state)
+
+        return InsightResponse(
+            workflow_id=workflow_id,
+            content=summary,
+            insight_type="executive_summary",
+            model=agent.llm.model_name,
+            provider=agent.llm.provider_name,
+        )
+
+    except Exception as e:
+        logger.exception(f"Failed to generate executive summary: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/insights/predictions/{workflow_id}", response_model=InsightResponse, tags=["insights"])
+async def get_predictive_narrative(
+    workflow_id: str,
+    provider: str = "claude",
+    model: Optional[str] = None,
+):
+    """
+    Generate a predictive narrative for a workflow with predictions.
+
+    Requires the workflow to have predictions calculated.
+    """
+    state_manager = get_state_manager()
+
+    workflow_state = await state_manager.get_workflow(workflow_id)
+    if not workflow_state:
+        raise HTTPException(status_code=404, detail="Workflow not found")
+
+    if not workflow_state.predictions:
+        raise HTTPException(
+            status_code=400,
+            detail="Workflow must have predictions to generate predictive narrative"
+        )
+
+    try:
+        agent = _get_insights_agent(provider, model)
+        narrative = await agent.generate_predictive_narrative(workflow_state)
+
+        return InsightResponse(
+            workflow_id=workflow_id,
+            content=narrative,
+            insight_type="predictive_narrative",
+            model=agent.llm.model_name,
+            provider=agent.llm.provider_name,
+        )
+
+    except Exception as e:
+        logger.exception(f"Failed to generate predictive narrative: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.post("/insights/explain-error", response_model=ErrorExplanationResponse, tags=["insights"])
+async def explain_validation_error(request: ErrorExplanationRequest):
+    """
+    Get a plain-language explanation of a validation error with remediation suggestions.
+    """
+    try:
+        agent = _get_insights_agent(request.provider, request.model)
+
+        explanation = await agent.explain_validation_error(
+            error_type=request.error_type,
+            dataset=request.dataset,
+            affected_count=request.affected_count,
+            affected_pct=request.affected_pct,
+            error_details=request.error_details,
+        )
+
+        return ErrorExplanationResponse(
+            error_type=request.error_type,
+            explanation=explanation,
+            model=agent.llm.model_name,
+            provider=agent.llm.provider_name,
+        )
+
+    except Exception as e:
+        logger.exception(f"Failed to explain error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/insights/providers", response_model=LLMStatusResponse, tags=["insights"])
+async def get_llm_providers():
+    """
+    Get the status of available LLM providers.
+    """
+    providers = []
+
+    # Check Claude
+    try:
+        claude_service = LLMService.create(provider="claude")
+        providers.append(LLMProviderStatus(
+            name="claude",
+            available=claude_service.is_available(),
+            default_model=claude_service.model_name,
+        ))
+    except Exception:
+        providers.append(LLMProviderStatus(
+            name="claude",
+            available=False,
+            default_model="claude-sonnet-4-20250514",
+        ))
+
+    # Check OpenAI
+    try:
+        openai_service = LLMService.create(provider="openai")
+        providers.append(LLMProviderStatus(
+            name="openai",
+            available=openai_service.is_available(),
+            default_model=openai_service.model_name,
+        ))
+    except Exception:
+        providers.append(LLMProviderStatus(
+            name="openai",
+            available=False,
+            default_model="gpt-4o",
+        ))
+
+    # Check Gemini
+    try:
+        gemini_service = LLMService.create(provider="gemini")
+        providers.append(LLMProviderStatus(
+            name="gemini",
+            available=gemini_service.is_available(),
+            default_model=gemini_service.model_name,
+        ))
+    except Exception:
+        providers.append(LLMProviderStatus(
+            name="gemini",
+            available=False,
+            default_model="gemini-2.0-flash",
+        ))
+
+    # Check Ollama
+    try:
+        ollama_service = LLMService.create(provider="ollama")
+        providers.append(LLMProviderStatus(
+            name="ollama",
+            available=ollama_service.is_available(),
+            default_model=ollama_service.model_name,
+        ))
+    except Exception:
+        providers.append(LLMProviderStatus(
+            name="ollama",
+            available=False,
+            default_model="llama3.2",
+        ))
+
+    return LLMStatusResponse(
+        providers=providers,
+        default_provider="claude",
+    )

@@ -16,6 +16,12 @@ A production-ready autonomous analytics pipeline for Medicare Shared Savings Pro
    │ DATA   │     │VALIDATION│   │ANALYSIS│    │REPORTING│
    │ AGENT  │────▶│  AGENT   │──▶│ AGENT  │───▶│  AGENT  │
    └────────┘     └──────────┘   └────────┘    └─────────┘
+                                                     │
+                                               ┌─────▼─────┐
+                                               │ INSIGHTS  │
+                                               │   AGENT   │
+                                               │   (LLM)   │
+                                               └───────────┘
 ```
 
 ### Agents
@@ -30,6 +36,8 @@ A production-ready autonomous analytics pipeline for Medicare Shared Savings Pro
 
 5. **Reporting Agent**: Generates PowerPoint executive reports and distributes via email to appropriate stakeholders.
 
+6. **Insights Agent** (LLM-powered): Generates executive summaries, predictive narratives, answers natural language queries, and explains validation errors using Claude, OpenAI, or local models via Ollama.
+
 ## Features
 
 - **Autonomous Execution**: Complete end-to-end workflow without manual intervention
@@ -39,6 +47,7 @@ A production-ready autonomous analytics pipeline for Medicare Shared Savings Pro
 - **Email Notifications**: Automatic notifications on completion/failure
 - **REST API**: Full workflow management via FastAPI endpoints
 - **Comprehensive Testing**: Unit and integration test suites
+- **LLM-Powered Insights**: Executive summaries, natural language queries, and predictive narratives via Claude, OpenAI, or Ollama
 
 ## Quick Start
 
@@ -107,6 +116,8 @@ curl http://localhost:8000/workflows/{workflow_id}
 
 ## API Endpoints
 
+### Workflow Management
+
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | POST | `/workflows/` | Start a new analytics workflow |
@@ -119,17 +130,33 @@ curl http://localhost:8000/workflows/{workflow_id}
 | GET | `/health` | System health check |
 | POST | `/test-data/generate` | Generate test data |
 
+### LLM Insights
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/insights/query` | Ask natural language questions about the data |
+| GET | `/insights/summary/{id}` | Generate executive summary for a workflow |
+| GET | `/insights/predictions/{id}` | Generate predictive narrative for a workflow |
+| POST | `/insights/explain-error` | Get plain-language explanation of validation errors |
+| GET | `/insights/providers` | Check status of available LLM providers |
+
 ## Configuration
 
 Environment variables:
 
 ```bash
+# Database & Infrastructure
 DATABASE_URL=postgresql://analytics:analytics_password@postgres:5432/healthcare_analytics
 REDIS_URL=redis://redis:6379/0
 SMTP_HOST=mailhog
 SMTP_PORT=1025
 DATA_DIR=/app/data
 REPORTS_DIR=/app/reports
+
+# LLM Providers (set in your shell environment)
+ANTHROPIC_API_KEY=sk-ant-...    # For Claude (default provider)
+OPENAI_API_KEY=sk-proj-...      # For OpenAI GPT models
+OLLAMA_BASE_URL=http://localhost:11434  # For local Ollama models
 ```
 
 ## Project Structure
@@ -149,7 +176,8 @@ agentic-analytics-pipeline/
 │   │   ├── data_extraction.py  # Data Extraction Agent
 │   │   ├── validation.py       # Validation Agent
 │   │   ├── analysis.py         # Analysis Agent
-│   │   └── reporting.py        # Reporting Agent
+│   │   ├── reporting.py        # Reporting Agent
+│   │   └── insights.py         # Insights Agent (LLM)
 │   ├── models/
 │   │   ├── workflow.py         # WorkflowState, AgentStatus
 │   │   ├── financial.py        # FinancialMetrics
@@ -160,7 +188,12 @@ agentic-analytics-pipeline/
 │   │   ├── state_manager.py    # Redis state persistence
 │   │   ├── database.py         # PostgreSQL connection
 │   │   ├── email_service.py    # SMTP email
-│   │   └── report_generator.py # PowerPoint generation
+│   │   ├── report_generator.py # PowerPoint generation
+│   │   └── llm/                # LLM Service
+│   │       ├── base.py         # Provider abstraction
+│   │       ├── service.py      # Main LLM service
+│   │       ├── prompts.py      # Prompt templates
+│   │       └── providers/      # Claude, OpenAI, Ollama
 │   ├── validation/
 │   │   ├── rules.py            # Validation rules
 │   │   └── remediation.py      # Auto-remediation
@@ -229,6 +262,69 @@ This will:
 - Probability of meeting savings target
 - Identified risks and opportunities
 - Recommended actions
+
+## LLM-Powered Insights
+
+The Insights Agent uses large language models to generate human-readable analysis from workflow data.
+
+### Supported Providers
+
+| Provider | Default Model | Configuration |
+|----------|---------------|---------------|
+| Claude (default) | claude-sonnet-4-20250514 | `ANTHROPIC_API_KEY` |
+| OpenAI | gpt-4o | `OPENAI_API_KEY` |
+| Ollama | llama3.1 | `OLLAMA_BASE_URL` |
+
+### Features
+
+**Executive Summary** (`GET /insights/summary/{workflow_id}`)
+
+Generates a 3-4 paragraph executive summary covering:
+- Financial performance and key drivers
+- Quality performance highlights and concerns
+- Risk profile and utilization patterns
+- Recommendations for the coming period
+
+**Predictive Narrative** (`GET /insights/predictions/{workflow_id}`)
+
+Generates forward-looking analysis including:
+- Year-end outlook with confidence levels
+- Key risks that could impact projections
+- Opportunities to improve outcomes
+- Specific recommendations for remaining months
+
+**Natural Language Queries** (`POST /insights/query`)
+
+Ask questions about the data in plain English:
+
+```bash
+curl -X POST http://localhost:8000/insights/query \
+  -H "Content-Type: application/json" \
+  -d '{
+    "question": "What is driving our savings this quarter?",
+    "workflow_id": "wf-abc123",
+    "provider": "claude"
+  }'
+```
+
+**Error Explanations** (`POST /insights/explain-error`)
+
+Get plain-language explanations of validation errors with remediation suggestions.
+
+### Switching Providers
+
+All insight endpoints accept `provider` and `model` parameters:
+
+```bash
+# Use OpenAI instead of Claude
+curl "http://localhost:8000/insights/summary/wf-abc123?provider=openai"
+
+# Use a specific model
+curl "http://localhost:8000/insights/summary/wf-abc123?provider=openai&model=gpt-4-turbo"
+
+# Use local Ollama
+curl "http://localhost:8000/insights/summary/wf-abc123?provider=ollama&model=llama3.2"
+```
 
 ## Validation Rules
 

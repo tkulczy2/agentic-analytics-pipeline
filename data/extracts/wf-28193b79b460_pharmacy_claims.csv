@@ -1,0 +1,335 @@
+claim_id,member_id,fill_date,paid_amount,drug_name,generic_indicator,days_supply,therapeutic_class,condition_category
+RX0000000053,M00004143,2026-01-14,23.04,Metformin,True,90,Mental Health,Chronic
+RX0000000218,M00002790,2026-01-03,10.53,Metoprolol,True,90,Cardiovascular,Acute
+RX0000000231,M00003892,2026-01-15,7.57,Gabapentin,False,30,Mental Health,Chronic
+RX0000000251,M00004301,2026-01-05,5.0,Metformin,True,30,Gastrointestinal,Chronic
+RX0000000283,M00003242,2026-01-06,8.08,Omeprazole,True,30,Pain Management,Chronic
+RX0000000296,M00003569,2026-01-01,18.66,Amlodipine,True,30,Mental Health,Acute
+RX0000000309,M00004220,2026-01-04,54.43,Levothyroxine,True,60,Respiratory,Acute
+RX0000000318,M00004742,2026-01-04,12.34,Sertraline,True,30,Immunology,Chronic
+RX0000000330,M00003354,2026-01-09,18.04,Metoprolol,True,90,Immunology,Maintenance
+RX0000000357,M00002704,2026-01-14,14.67,Atorvastatin,True,30,Endocrine,Chronic
+RX0000000380,M00004810,2026-01-10,19.84,Metoprolol,True,60,Gastrointestinal,Chronic
+RX0000000398,M00002395,2026-01-04,38.31,Sertraline,False,30,Immunology,Chronic
+RX0000000428,M00000396,2026-01-13,17.58,Omeprazole,False,30,Immunology,Chronic
+RX0000000440,M00002302,2026-01-08,21.78,Omeprazole,True,90,Respiratory,Acute
+RX0000000453,M00002207,2026-01-12,6.98,Lisinopril,True,60,Respiratory,Maintenance
+RX0000000454,M00002824,2026-01-08,54.9,Hydrochlorothiazide,True,60,Diabetes,Acute
+RX0000000500,M00002284,2026-01-15,21.76,Albuterol,True,30,Pain Management,Chronic
+RX0000000514,M00001381,2026-01-03,41.52,Metformin,False,60,Gastrointestinal,Acute
+RX0000000538,M00001081,2026-01-08,15.1,Lisinopril,True,30,Pain Management,Maintenance
+RX0000000546,M00004092,2026-01-14,35.62,Levothyroxine,False,90,Endocrine,Maintenance
+RX0000000604,M00001109,2026-01-11,5.0,Gabapentin,True,90,Pain Management,Maintenance
+RX0000000623,M00001279,2026-01-10,13.71,Amlodipine,True,30,Immunology,Maintenance
+RX0000000639,M00000995,2026-01-14,176.62,Lisinopril,False,90,Immunology,Maintenance
+RX0000000647,M00001461,2026-01-15,14.45,Losartan,False,60,Pain Management,Acute
+RX0000000657,M00004106,2026-01-08,16.2,Atorvastatin,True,90,Respiratory,Maintenance
+RX0000000663,M00001166,2026-01-07,28.96,Lisinopril,False,30,Endocrine,Acute
+RX0000000673,M00003129,2026-01-07,86.09,Gabapentin,True,60,Diabetes,Acute
+RX0000000722,M00002189,2026-01-15,11.68,Amlodipine,True,60,Mental Health,Maintenance
+RX0000000728,M00001231,2026-01-15,51.69,Amlodipine,False,30,Endocrine,Maintenance
+RX0000000745,M00003088,2026-01-15,25.1,Levothyroxine,True,90,Pain Management,Chronic
+RX0000000778,M00001924,2026-01-01,15.27,Albuterol,False,60,Cardiovascular,Maintenance
+RX0000000787,M00000141,2026-01-07,5.72,Simvastatin,True,60,Endocrine,Chronic
+RX0000000805,M00003329,2026-01-08,11.53,Levothyroxine,True,30,Respiratory,Maintenance
+RX0000000868,M00003884,2026-01-10,27.69,Amlodipine,True,60,Immunology,Maintenance
+RX0000000910,M00000796,2026-01-09,54.6,Atorvastatin,False,90,Pain Management,Chronic
+RX0000000919,M00004484,2026-01-13,37.25,Hydrochlorothiazide,True,60,Endocrine,Acute
+RX0000000932,M00004506,2026-01-02,12.16,Atorvastatin,False,90,Mental Health,Chronic
+RX0000000954,M00000856,2026-01-09,5.0,Amlodipine,True,60,Gastrointestinal,Maintenance
+RX0000001020,M00002221,2026-01-03,27.63,Albuterol,True,60,Mental Health,Chronic
+RX0000001031,M00004795,2026-01-02,19.61,Amlodipine,True,60,Cardiovascular,Chronic
+RX0000001042,M00001487,2026-01-02,26.67,Metoprolol,True,90,Mental Health,Chronic
+RX0000001045,M00003821,2026-01-11,10.86,Metoprolol,False,90,Mental Health,Chronic
+RX0000001056,M00004170,2026-01-14,27.91,Amlodipine,True,30,Diabetes,Chronic
+RX0000001085,M00001138,2026-01-07,10.67,Metformin,True,30,Immunology,Acute
+RX0000001122,M00003018,2026-01-11,11.61,Amlodipine,True,90,Cardiovascular,Chronic
+RX0000001142,M00001892,2026-01-07,5.0,Gabapentin,True,60,Immunology,Acute
+RX0000001174,M00000592,2026-01-04,43.65,Lisinopril,True,90,Immunology,Maintenance
+RX0000001200,M00003993,2026-01-08,35.53,Hydrochlorothiazide,True,90,Gastrointestinal,Maintenance
+RX0000001209,M00004069,2026-01-10,5.0,Levothyroxine,True,90,Gastrointestinal,Maintenance
+RX0000001223,M00002286,2026-01-14,11.56,Levothyroxine,True,30,Mental Health,Acute
+RX0000001272,M00004590,2026-01-14,10.51,Gabapentin,True,90,Pain Management,Chronic
+RX0000001277,M00003309,2026-01-02,12.62,Levothyroxine,True,30,Endocrine,Chronic
+RX0000001293,M00004850,2026-01-11,15.3,Metoprolol,False,30,Endocrine,Chronic
+RX0000001306,M00004650,2026-01-13,22.64,Omeprazole,True,60,Immunology,Chronic
+RX0000001357,M00001792,2026-01-10,17.13,Omeprazole,True,60,Endocrine,Acute
+RX0000001407,M00000566,2026-01-11,18.16,Montelukast,False,90,Immunology,Maintenance
+RX0000001417,M00001724,2026-01-01,12.48,Albuterol,False,30,Mental Health,Chronic
+RX0000001447,M00000993,2026-01-05,9.98,Amlodipine,True,90,Mental Health,Maintenance
+RX0000001502,M00002852,2026-01-06,63.02,Sertraline,True,30,Gastrointestinal,Chronic
+RX0000001521,M00000764,2026-01-12,28.97,Montelukast,True,60,Gastrointestinal,Maintenance
+RX0000001548,M00002347,2026-01-07,42.59,Losartan,True,30,Immunology,Chronic
+RX0000001578,M00002070,2026-01-11,62.79,Sertraline,True,30,Respiratory,Acute
+RX0000001604,M00000314,2026-01-13,17.72,Simvastatin,True,30,Cardiovascular,Maintenance
+RX0000001653,M00000710,2026-01-03,5.0,Simvastatin,False,90,Diabetes,Acute
+RX0000001709,M00001519,2026-01-13,11.1,Hydrochlorothiazide,True,30,Cardiovascular,Maintenance
+RX0000001741,M00004995,2026-01-10,26.4,Levothyroxine,True,30,Endocrine,Acute
+RX0000001745,M00003129,2026-01-11,56.0,Hydrochlorothiazide,False,60,Pain Management,Acute
+RX0000001789,M00001466,2026-01-02,25.45,Metoprolol,False,30,Immunology,Maintenance
+RX0000001810,M00001609,2026-01-09,17.24,Omeprazole,True,30,Immunology,Acute
+RX0000001829,M00003011,2026-01-05,99.4,Metoprolol,False,30,Respiratory,Chronic
+RX0000001846,M00000600,2026-01-05,5.0,Sertraline,False,60,Mental Health,Maintenance
+RX0000001853,M00003198,2026-01-03,12.54,Metformin,False,30,Gastrointestinal,Acute
+RX0000001855,M00002409,2026-01-02,5.93,Levothyroxine,True,60,Gastrointestinal,Maintenance
+RX0000001900,M00003426,2026-01-06,11.35,Hydrochlorothiazide,False,30,Pain Management,Maintenance
+RX0000001910,M00000330,2026-01-04,5.0,Albuterol,True,60,Mental Health,Chronic
+RX0000001967,M00002099,2026-01-06,69.07,Atorvastatin,True,30,Mental Health,Chronic
+RX0000001981,M00002655,2026-01-02,13.19,Amlodipine,True,60,Immunology,Acute
+RX0000002001,M00004612,2026-01-06,87.22,Metoprolol,True,90,Endocrine,Maintenance
+RX0000002109,M00004367,2026-01-03,33.31,Levothyroxine,True,30,Gastrointestinal,Chronic
+RX0000002158,M00001845,2026-01-01,13.59,Metoprolol,True,30,Immunology,Maintenance
+RX0000002160,M00003436,2026-01-03,74.3,Losartan,True,60,Endocrine,Maintenance
+RX0000002188,M00002590,2026-01-11,17.08,Levothyroxine,False,30,Respiratory,Acute
+RX0000002195,M00004866,2026-01-07,40.21,Hydrochlorothiazide,True,90,Endocrine,Maintenance
+RX0000002203,M00002111,2026-01-08,29.31,Gabapentin,True,90,Diabetes,Maintenance
+RX0000002211,M00004378,2026-01-14,22.45,Metoprolol,True,60,Cardiovascular,Maintenance
+RX0000002216,M00000582,2026-01-08,5.18,Amlodipine,True,30,Diabetes,Acute
+RX0000002218,M00000780,2026-01-11,45.04,Montelukast,False,90,Immunology,Chronic
+RX0000002241,M00003860,2026-01-10,7.36,Albuterol,True,60,Respiratory,Chronic
+RX0000002243,M00002996,2026-01-12,14.82,Montelukast,True,30,Gastrointestinal,Chronic
+RX0000002281,M00003943,2026-01-03,70.61,Gabapentin,False,30,Respiratory,Maintenance
+RX0000002288,M00003755,2026-01-03,9.57,Amlodipine,True,90,Diabetes,Maintenance
+RX0000002294,M00000313,2026-01-01,28.05,Amlodipine,False,60,Pain Management,Chronic
+RX0000002297,M00002311,2026-01-03,53.66,Atorvastatin,False,90,Mental Health,Maintenance
+RX0000002312,M00000429,2026-01-13,20.51,Levothyroxine,True,60,Mental Health,Maintenance
+RX0000002313,M00001116,2026-01-15,6.44,Atorvastatin,False,30,Endocrine,Acute
+RX0000002338,M00000096,2026-01-08,21.08,Montelukast,False,60,Cardiovascular,Maintenance
+RX0000002345,M00000332,2026-01-11,71.71,Gabapentin,False,30,Cardiovascular,Acute
+RX0000002350,M00004701,2026-01-01,13.41,Atorvastatin,False,90,Mental Health,Chronic
+RX0000002416,M00002592,2026-01-14,75.77,Simvastatin,True,30,Mental Health,Acute
+RX0000002451,M00000991,2026-01-06,21.9,Levothyroxine,False,90,Mental Health,Chronic
+RX0000002455,M00001620,2026-01-06,177.49,Losartan,True,90,Mental Health,Maintenance
+RX0000002495,M00003323,2026-01-09,5.67,Sertraline,True,30,Mental Health,Chronic
+RX0000002561,M00003929,2026-01-04,5.0,Atorvastatin,True,30,Cardiovascular,Acute
+RX0000002673,M00004331,2026-01-05,14.0,Metformin,True,60,Immunology,Chronic
+RX0000002698,M00004854,2026-01-01,11.51,Hydrochlorothiazide,True,90,Immunology,Maintenance
+RX0000002764,M00003063,2026-01-01,10.3,Amlodipine,False,30,Gastrointestinal,Maintenance
+RX0000002773,M00001566,2026-01-11,15.66,Metformin,False,90,Immunology,Chronic
+RX0000002815,M00002963,2026-01-04,12.77,Lisinopril,True,90,Mental Health,Maintenance
+RX0000002868,M00003130,2026-01-05,40.21,Omeprazole,True,60,Respiratory,Acute
+RX0000002888,M00002096,2026-01-10,14.13,Metformin,True,30,Pain Management,Chronic
+RX0000002947,M00000626,2026-01-11,26.4,Sertraline,False,90,Pain Management,Maintenance
+RX0000002954,M00000406,2026-01-01,8.81,Amlodipine,True,30,Immunology,Chronic
+RX0000003004,M00001806,2026-01-06,142.68,Gabapentin,True,30,Diabetes,Maintenance
+RX0000003058,M00004850,2026-01-15,18.27,Montelukast,True,60,Gastrointestinal,Maintenance
+RX0000003064,M00003139,2026-01-09,42.75,Atorvastatin,True,90,Immunology,Maintenance
+RX0000003072,M00004539,2026-01-04,16.79,Albuterol,True,30,Pain Management,Acute
+RX0000003112,M00004680,2026-01-10,160.05,Levothyroxine,True,60,Immunology,Acute
+RX0000003114,M00001230,2026-01-09,12.64,Sertraline,True,60,Cardiovascular,Acute
+RX0000003139,M00002881,2026-01-09,47.68,Simvastatin,True,90,Cardiovascular,Chronic
+RX0000003149,M00000129,2026-01-02,5.0,Losartan,True,30,Diabetes,Acute
+RX0000003170,M00000379,2026-01-05,85.45,Metoprolol,True,60,Respiratory,Maintenance
+RX0000003217,M00002610,2026-01-12,15.49,Amlodipine,True,30,Immunology,Chronic
+RX0000003220,M00002825,2026-01-08,64.39,Simvastatin,False,60,Endocrine,Chronic
+RX0000003228,M00003281,2026-01-12,198.6,Gabapentin,True,30,Diabetes,Acute
+RX0000003244,M00001095,2026-01-07,5.0,Gabapentin,True,30,Endocrine,Maintenance
+RX0000003270,M00002064,2026-01-03,31.48,Losartan,True,30,Diabetes,Maintenance
+RX0000003286,M00001034,2026-01-05,5.0,Omeprazole,True,90,Immunology,Maintenance
+RX0000003308,M00001220,2026-01-10,26.64,Omeprazole,True,60,Immunology,Chronic
+RX0000003337,M00000584,2026-01-09,5.0,Atorvastatin,True,60,Mental Health,Maintenance
+RX0000003368,M00004175,2026-01-06,28.97,Sertraline,True,90,Gastrointestinal,Chronic
+RX0000003396,M00001372,2026-01-05,21.64,Metoprolol,True,60,Mental Health,Maintenance
+RX0000003434,M00004361,2026-01-12,73.47,Hydrochlorothiazide,False,90,Respiratory,Chronic
+RX0000003441,M00000522,2026-01-10,5.0,Sertraline,True,30,Diabetes,Acute
+RX0000003468,M00003680,2026-01-02,42.22,Sertraline,True,30,Pain Management,Maintenance
+RX0000003497,M00002710,2026-01-02,67.47,Albuterol,False,60,Diabetes,Maintenance
+RX0000003504,M00000853,2026-01-02,28.5,Sertraline,True,30,Respiratory,Acute
+RX0000003545,M00004040,2026-01-11,36.93,Montelukast,True,30,Respiratory,Acute
+RX0000003554,M00001500,2026-01-09,7.14,Gabapentin,False,90,Respiratory,Chronic
+RX0000003568,M00001491,2026-01-03,24.62,Simvastatin,False,30,Cardiovascular,Maintenance
+RX0000003578,M00002982,2026-01-11,503.24,Hydrochlorothiazide,True,60,Diabetes,Maintenance
+RX0000003594,M00000019,2026-01-08,5.0,Montelukast,True,90,Endocrine,Chronic
+RX0000003600,M00002625,2026-01-10,39.47,Montelukast,True,90,Mental Health,Chronic
+RX0000003626,M00002673,2026-01-15,35.6,Losartan,True,60,Endocrine,Acute
+RX0000003642,M00001526,2026-01-01,485.3,Montelukast,False,90,Cardiovascular,Maintenance
+RX0000003647,M00000027,2026-01-09,19.31,Hydrochlorothiazide,True,90,Endocrine,Chronic
+RX0000003674,M00001961,2026-01-05,20.82,Levothyroxine,True,90,Endocrine,Chronic
+RX0000003711,M00003538,2026-01-13,7.64,Atorvastatin,True,90,Respiratory,Chronic
+RX0000003714,M00002867,2026-01-03,5.0,Sertraline,False,60,Mental Health,Acute
+RX0000003747,M00004516,2026-01-08,5.42,Lisinopril,False,90,Mental Health,Acute
+RX0000003751,M00001117,2026-01-05,6.38,Lisinopril,True,60,Mental Health,Maintenance
+RX0000003763,M00004058,2026-01-09,17.69,Montelukast,True,60,Cardiovascular,Maintenance
+RX0000003809,M00004888,2026-01-05,20.75,Omeprazole,True,30,Endocrine,Maintenance
+RX0000003821,M00002593,2026-01-12,33.73,Metoprolol,True,90,Cardiovascular,Acute
+RX0000003886,M00003545,2026-01-07,10.95,Metformin,True,30,Immunology,Chronic
+RX0000003927,M00002277,2026-01-13,19.59,Albuterol,False,90,Immunology,Maintenance
+RX0000003944,M00000146,2026-01-07,13.09,Metformin,False,60,Gastrointestinal,Maintenance
+RX0000003946,M00001770,2026-01-14,5.51,Sertraline,True,60,Mental Health,Maintenance
+RX0000003947,M00000798,2026-01-01,69.76,Montelukast,True,60,Diabetes,Acute
+RX0000003956,M00002333,2026-01-08,5.0,Omeprazole,False,90,Diabetes,Chronic
+RX0000003976,M00004451,2026-01-14,58.72,Atorvastatin,False,30,Immunology,Chronic
+RX0000004024,M00003450,2026-01-06,19.28,Albuterol,False,90,Cardiovascular,Acute
+RX0000004030,M00001639,2026-01-10,11.45,Albuterol,True,60,Mental Health,Maintenance
+RX0000004108,M00000791,2026-01-01,110.36,Simvastatin,True,90,Immunology,Acute
+RX0000004171,M00001649,2026-01-07,28.73,Gabapentin,True,30,Diabetes,Chronic
+RX0000004177,M00001602,2026-01-06,7.32,Simvastatin,True,30,Respiratory,Acute
+RX0000004188,M00003146,2026-01-01,153.67,Atorvastatin,True,60,Endocrine,Acute
+RX0000004190,M00004772,2026-01-10,76.74,Lisinopril,True,30,Endocrine,Chronic
+RX0000004199,M00002964,2026-01-02,62.57,Gabapentin,True,90,Cardiovascular,Chronic
+RX0000004213,M00002675,2026-01-06,113.31,Hydrochlorothiazide,True,60,Endocrine,Acute
+RX0000004223,M00003312,2026-01-05,30.78,Montelukast,True,30,Diabetes,Acute
+RX0000004226,M00001125,2026-01-02,28.02,Metformin,True,90,Mental Health,Acute
+RX0000004312,M00000119,2026-01-01,79.39,Sertraline,True,60,Immunology,Acute
+RX0000004313,M00004706,2026-01-08,10.01,Metoprolol,False,90,Cardiovascular,Maintenance
+RX0000004332,M00004257,2026-01-03,13.77,Losartan,False,90,Gastrointestinal,Chronic
+RX0000004377,M00001199,2026-01-08,16.15,Metformin,True,60,Endocrine,Maintenance
+RX0000004384,M00002988,2026-01-03,22.62,Simvastatin,False,90,Diabetes,Maintenance
+RX0000004397,M00002664,2026-01-06,30.41,Gabapentin,True,30,Mental Health,Acute
+RX0000004420,M00002338,2026-01-04,32.05,Montelukast,True,90,Gastrointestinal,Chronic
+RX0000004425,M00001164,2026-01-10,5.0,Levothyroxine,True,60,Mental Health,Acute
+RX0000004427,M00000920,2026-01-12,25.57,Atorvastatin,True,30,Respiratory,Acute
+RX0000004432,M00003016,2026-01-02,29.66,Levothyroxine,False,60,Pain Management,Acute
+RX0000004460,M00003733,2026-01-04,37.41,Hydrochlorothiazide,True,30,Respiratory,Acute
+RX0000004487,M00002182,2026-01-11,6.48,Metoprolol,True,30,Cardiovascular,Chronic
+RX0000004497,M00004523,2026-01-14,20.76,Atorvastatin,True,30,Gastrointestinal,Chronic
+RX0000004513,M00002756,2026-01-04,36.63,Sertraline,True,30,Mental Health,Chronic
+RX0000004515,M00001241,2026-01-09,8.26,Metformin,True,90,Diabetes,Acute
+RX0000004528,M00002517,2026-01-12,59.29,Gabapentin,True,60,Gastrointestinal,Chronic
+RX0000004547,M00002050,2026-01-07,62.58,Amlodipine,True,30,Cardiovascular,Maintenance
+RX0000004551,M00000230,2026-01-03,5.0,Omeprazole,True,30,Pain Management,Acute
+RX0000004580,M00004359,2026-01-06,68.5,Losartan,True,60,Mental Health,Chronic
+RX0000004627,M00004747,2026-01-07,48.67,Lisinopril,False,30,Mental Health,Maintenance
+RX0000004635,M00004940,2026-01-04,6.98,Metformin,True,60,Pain Management,Maintenance
+RX0000004664,M00003091,2026-01-08,46.05,Sertraline,True,60,Mental Health,Acute
+RX0000004704,M00004974,2026-01-01,41.95,Hydrochlorothiazide,False,60,Cardiovascular,Chronic
+RX0000004710,M00004788,2026-01-08,20.47,Simvastatin,True,90,Respiratory,Acute
+RX0000004712,M00003073,2026-01-12,30.05,Losartan,False,90,Immunology,Chronic
+RX0000004723,M00001018,2026-01-09,15.82,Sertraline,False,60,Diabetes,Acute
+RX0000004727,M00002386,2026-01-10,31.35,Losartan,True,60,Diabetes,Chronic
+RX0000004739,M00003462,2026-01-14,14.2,Albuterol,True,60,Respiratory,Maintenance
+RX0000004776,M00001674,2026-01-02,10.18,Simvastatin,True,60,Gastrointestinal,Maintenance
+RX0000004779,M00004321,2026-01-05,20.81,Losartan,False,30,Gastrointestinal,Chronic
+RX0000004781,M00000558,2026-01-06,13.57,Hydrochlorothiazide,True,30,Cardiovascular,Chronic
+RX0000004786,M00000809,2026-01-11,82.5,Metformin,True,90,Endocrine,Chronic
+RX0000004791,M00000497,2026-01-05,27.49,Omeprazole,False,60,Pain Management,Maintenance
+RX0000004830,M00003379,2026-01-03,14.54,Hydrochlorothiazide,False,60,Respiratory,Chronic
+RX0000004834,M00000606,2026-01-08,59.23,Albuterol,False,30,Respiratory,Maintenance
+RX0000004836,M00001838,2026-01-14,103.55,Metformin,True,90,Endocrine,Chronic
+RX0000004868,M00000146,2026-01-04,180.09,Levothyroxine,True,90,Immunology,Maintenance
+RX0000004888,M00003918,2026-01-14,12.17,Levothyroxine,True,90,Pain Management,Maintenance
+RX0000004916,M00002688,2026-01-12,51.93,Atorvastatin,True,60,Mental Health,Acute
+RX0000004924,M00001014,2026-01-11,5.0,Sertraline,True,30,Respiratory,Chronic
+RX0000004951,M00000675,2026-01-12,5.0,Atorvastatin,False,60,Respiratory,Maintenance
+RX0000004966,M00002804,2026-01-03,25.53,Amlodipine,True,60,Diabetes,Acute
+RX0000004986,M00001146,2026-01-09,16.05,Metformin,False,90,Respiratory,Maintenance
+RX0000004988,M00001499,2026-01-02,10.65,Simvastatin,True,30,Pain Management,Maintenance
+RX0000004993,M00003972,2026-01-07,37.73,Amlodipine,True,60,Respiratory,Acute
+RX0000005000,M00003199,2026-01-01,32.08,Losartan,True,60,Immunology,Chronic
+RX0000005066,M00002360,2026-01-02,9.62,Atorvastatin,True,30,Cardiovascular,Chronic
+RX0000005070,M00000501,2026-01-12,18.31,Atorvastatin,False,90,Pain Management,Chronic
+RX0000005075,M00001126,2026-01-07,5.0,Metformin,True,60,Pain Management,Chronic
+RX0000005110,M00002852,2026-01-06,16.74,Simvastatin,True,60,Gastrointestinal,Maintenance
+RX0000005135,M00003969,2026-01-04,5.96,Omeprazole,False,90,Respiratory,Maintenance
+RX0000005212,M00004971,2026-01-11,12.36,Simvastatin,True,30,Immunology,Chronic
+RX0000005248,M00000748,2026-01-13,43.79,Gabapentin,True,30,Respiratory,Acute
+RX0000005267,M00000880,2026-01-11,21.52,Albuterol,True,30,Immunology,Chronic
+RX0000005276,M00001069,2026-01-03,17.23,Metformin,False,60,Respiratory,Chronic
+RX0000005316,M00004238,2026-01-03,9.03,Gabapentin,True,60,Diabetes,Chronic
+RX0000005352,M00004332,2026-01-01,63.68,Gabapentin,False,90,Immunology,Chronic
+RX0000005355,M00001436,2026-01-11,6.04,Hydrochlorothiazide,False,90,Immunology,Chronic
+RX0000005408,M00000709,2026-01-09,12.54,Atorvastatin,True,60,Pain Management,Chronic
+RX0000005422,M00001202,2026-01-15,79.97,Montelukast,True,60,Diabetes,Chronic
+RX0000005479,M00002634,2026-01-14,41.68,Hydrochlorothiazide,True,30,Immunology,Maintenance
+RX0000005490,M00004891,2026-01-14,5.0,Simvastatin,True,30,Mental Health,Chronic
+RX0000005498,M00004738,2026-01-12,7.24,Lisinopril,False,90,Immunology,Chronic
+RX0000005523,M00004751,2026-01-14,12.15,Atorvastatin,True,30,Gastrointestinal,Acute
+RX0000005524,M00002080,2026-01-05,5.0,Levothyroxine,True,90,Respiratory,Maintenance
+RX0000005534,M00000733,2026-01-06,19.85,Montelukast,True,30,Diabetes,Chronic
+RX0000005570,M00001003,2026-01-13,22.42,Albuterol,True,30,Pain Management,Maintenance
+RX0000005595,M00000648,2026-01-15,23.87,Metoprolol,True,60,Gastrointestinal,Acute
+RX0000005606,M00003730,2026-01-07,112.5,Lisinopril,True,60,Gastrointestinal,Maintenance
+RX0000005621,M00004217,2026-01-01,5.0,Montelukast,True,90,Pain Management,Acute
+RX0000005629,M00003277,2026-01-09,14.97,Gabapentin,True,60,Immunology,Acute
+RX0000005635,M00004954,2026-01-03,16.44,Omeprazole,True,30,Immunology,Maintenance
+RX0000005637,M00001517,2026-01-10,49.61,Levothyroxine,True,30,Pain Management,Chronic
+RX0000005680,M00004797,2026-01-10,14.62,Omeprazole,False,90,Diabetes,Maintenance
+RX0000005697,M00003702,2026-01-08,40.44,Simvastatin,True,60,Endocrine,Acute
+RX0000005743,M00001691,2026-01-01,32.31,Lisinopril,True,60,Endocrine,Maintenance
+RX0000005821,M00003963,2026-01-10,55.09,Metformin,True,90,Respiratory,Maintenance
+RX0000005825,M00002660,2026-01-02,26.86,Gabapentin,True,90,Respiratory,Maintenance
+RX0000005968,M00001639,2026-01-10,25.06,Lisinopril,True,30,Respiratory,Maintenance
+RX0000006049,M00002076,2026-01-11,23.46,Sertraline,True,30,Cardiovascular,Maintenance
+RX0000006054,M00000794,2026-01-07,42.5,Gabapentin,True,60,Cardiovascular,Acute
+RX0000006150,M00004752,2026-01-10,9.07,Montelukast,True,60,Respiratory,Maintenance
+RX0000006156,M00001526,2026-01-14,30.84,Sertraline,True,30,Endocrine,Chronic
+RX0000006183,M00001146,2026-01-12,157.77,Montelukast,True,30,Mental Health,Chronic
+RX0000006235,M00000857,2026-01-11,5.0,Metformin,False,60,Diabetes,Maintenance
+RX0000006357,M00003433,2026-01-11,49.12,Levothyroxine,True,30,Cardiovascular,Acute
+RX0000006358,M00003901,2026-01-04,57.34,Atorvastatin,True,60,Immunology,Acute
+RX0000006406,M00003156,2026-01-09,54.11,Losartan,True,30,Gastrointestinal,Maintenance
+RX0000006419,M00002844,2026-01-13,15.6,Albuterol,True,30,Pain Management,Acute
+RX0000006453,M00002801,2026-01-07,11.37,Lisinopril,False,60,Cardiovascular,Acute
+RX0000006458,M00004712,2026-01-06,8.39,Amlodipine,True,90,Mental Health,Acute
+RX0000006460,M00004491,2026-01-14,42.14,Sertraline,True,90,Pain Management,Maintenance
+RX0000006468,M00004284,2026-01-14,13.11,Levothyroxine,True,30,Cardiovascular,Chronic
+RX0000006508,M00002279,2026-01-12,6.28,Montelukast,True,30,Respiratory,Maintenance
+RX0000006522,M00002567,2026-01-04,5.0,Hydrochlorothiazide,True,90,Respiratory,Maintenance
+RX0000006539,M00000865,2026-01-14,28.97,Levothyroxine,False,30,Cardiovascular,Maintenance
+RX0000006558,M00001269,2026-01-14,5.0,Levothyroxine,True,30,Gastrointestinal,Chronic
+RX0000006577,M00001983,2026-01-13,8.52,Omeprazole,True,90,Cardiovascular,Acute
+RX0000006600,M00000305,2026-01-11,39.16,Metoprolol,True,30,Immunology,Maintenance
+RX0000006605,M00002877,2026-01-01,5.0,Levothyroxine,False,30,Gastrointestinal,Maintenance
+RX0000006676,M00000556,2026-01-12,144.35,Amlodipine,True,60,Pain Management,Chronic
+RX0000006719,M00003852,2026-01-11,47.81,Simvastatin,True,90,Cardiovascular,Maintenance
+RX0000006720,M00002532,2026-01-07,6.49,Amlodipine,True,30,Cardiovascular,Maintenance
+RX0000006727,M00004185,2026-01-05,31.01,Amlodipine,True,60,Respiratory,Acute
+RX0000006747,M00002528,2026-01-12,104.04,Losartan,True,30,Gastrointestinal,Chronic
+RX0000006752,M00002847,2026-01-03,43.14,Hydrochlorothiazide,True,90,Cardiovascular,Maintenance
+RX0000006762,M00004722,2026-01-07,26.67,Atorvastatin,True,60,Mental Health,Chronic
+RX0000006777,M00002116,2026-01-09,21.15,Losartan,False,90,Immunology,Chronic
+RX0000006830,M00001950,2026-01-11,69.08,Albuterol,True,90,Respiratory,Maintenance
+RX0000006832,M00003909,2026-01-01,9.38,Simvastatin,True,90,Gastrointestinal,Chronic
+RX0000006874,M00004841,2026-01-10,5.31,Simvastatin,False,90,Pain Management,Chronic
+RX0000006912,M00004585,2026-01-04,19.56,Levothyroxine,True,60,Gastrointestinal,Acute
+RX0000006913,M00003703,2026-01-07,32.26,Metoprolol,False,60,Mental Health,Chronic
+RX0000006914,M00004967,2026-01-03,28.9,Metoprolol,False,90,Cardiovascular,Acute
+RX0000007024,M00004655,2026-01-10,27.82,Amlodipine,True,60,Respiratory,Maintenance
+RX0000007041,M00004124,2026-01-05,41.43,Levothyroxine,True,60,Respiratory,Maintenance
+RX0000007048,M00000438,2026-01-07,42.98,Albuterol,True,60,Cardiovascular,Chronic
+RX0000007089,M00004370,2026-01-07,8.09,Lisinopril,True,90,Pain Management,Chronic
+RX0000007091,M00002943,2026-01-14,15.78,Metoprolol,False,60,Cardiovascular,Maintenance
+RX0000007121,M00000899,2026-01-10,30.61,Albuterol,True,60,Gastrointestinal,Maintenance
+RX0000007147,M00001018,2026-01-14,6.71,Montelukast,True,90,Diabetes,Acute
+RX0000007175,M00003239,2026-01-02,6.09,Sertraline,False,30,Immunology,Chronic
+RX0000007200,M00001763,2026-01-13,5.0,Albuterol,False,60,Gastrointestinal,Maintenance
+RX0000007219,M00002190,2026-01-15,67.76,Atorvastatin,True,30,Endocrine,Acute
+RX0000007235,M00004486,2026-01-01,15.34,Losartan,True,60,Cardiovascular,Acute
+RX0000007256,M00000422,2026-01-09,39.66,Omeprazole,True,30,Diabetes,Acute
+RX0000007300,M00004337,2026-01-13,23.62,Atorvastatin,False,60,Cardiovascular,Maintenance
+RX0000007308,M00001917,2026-01-01,8.92,Atorvastatin,True,30,Endocrine,Maintenance
+RX0000007310,M00004049,2026-01-06,9.72,Metformin,False,60,Endocrine,Acute
+RX0000007333,M00003624,2026-01-02,12.26,Omeprazole,False,90,Immunology,Chronic
+RX0000007343,M00002615,2026-01-01,10.91,Lisinopril,True,60,Diabetes,Acute
+RX0000007351,M00001432,2026-01-11,5.0,Lisinopril,False,90,Pain Management,Acute
+RX0000007356,M00000362,2026-01-07,6.23,Gabapentin,True,60,Diabetes,Maintenance
+RX0000007361,M00003560,2026-01-04,45.77,Omeprazole,False,60,Gastrointestinal,Acute
+RX0000007378,M00004603,2026-01-08,65.87,Sertraline,True,90,Endocrine,Acute
+RX0000007425,M00000262,2026-01-02,33.81,Metoprolol,True,60,Immunology,Maintenance
+RX0000007446,M00003324,2026-01-13,89.1,Levothyroxine,True,90,Pain Management,Maintenance
+RX0000007512,M00003351,2026-01-01,28.71,Losartan,True,90,Diabetes,Acute
+RX0000007517,M00001682,2026-01-04,5.0,Metoprolol,True,60,Gastrointestinal,Chronic
+RX0000007520,M00002475,2026-01-10,24.48,Gabapentin,False,30,Endocrine,Maintenance
+RX0000007538,M00003633,2026-01-08,23.56,Losartan,False,60,Respiratory,Maintenance
+RX0000007545,M00000064,2026-01-09,50.57,Lisinopril,True,90,Gastrointestinal,Maintenance
+RX0000007561,M00003535,2026-01-13,12.96,Simvastatin,True,60,Pain Management,Maintenance
+RX0000007583,M00001065,2026-01-13,30.2,Lisinopril,True,90,Immunology,Maintenance
+RX0000007650,M00003190,2026-01-03,17.2,Atorvastatin,False,90,Diabetes,Maintenance
+RX0000007678,M00003023,2026-01-12,19.09,Metoprolol,True,90,Immunology,Chronic
+RX0000007718,M00002329,2026-01-10,126.19,Amlodipine,True,60,Diabetes,Chronic
+RX0000007763,M00004495,2026-01-05,64.92,Montelukast,False,60,Endocrine,Chronic
+RX0000007790,M00001478,2026-01-03,36.51,Gabapentin,True,30,Cardiovascular,Maintenance
+RX0000007854,M00000300,2026-01-09,15.11,Montelukast,False,30,Respiratory,Maintenance
+RX0000007860,M00000287,2026-01-14,28.02,Atorvastatin,False,30,Endocrine,Acute
+RX0000007870,M00002587,2026-01-02,25.54,Losartan,False,60,Diabetes,Maintenance
+RX0000007877,M00000631,2026-01-03,6.1,Amlodipine,False,60,Respiratory,Acute
+RX0000007898,M00003214,2026-01-12,15.52,Losartan,True,30,Diabetes,Maintenance
+RX0000007914,M00003756,2026-01-03,5.0,Amlodipine,True,30,Endocrine,Chronic
+RX0000007925,M00000359,2026-01-06,8.98,Hydrochlorothiazide,True,30,Pain Management,Maintenance
+RX0000007963,M00001435,2026-01-13,40.02,Sertraline,True,90,Cardiovascular,Chronic
+RX0000007966,M00003699,2026-01-15,106.2,Gabapentin,True,60,Gastrointestinal,Maintenance
+RX0000007970,M00000086,2026-01-04,19.21,Hydrochlorothiazide,True,90,Pain Management,Chronic
+RX0000007998,M00003238,2026-01-08,37.5,Lisinopril,True,30,Diabetes,Acute
+RX0000008006,M00000584,2026-01-09,5.0,Atorvastatin,True,60,Mental Health,Maintenance
+RX0000008093,M00003624,2026-01-02,12.26,Omeprazole,False,90,Immunology,Chronic
+RX0000008108,M00004722,2026-01-07,26.67,Atorvastatin,True,60,Mental Health,Chronic
